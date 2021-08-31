@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Pokemon Application</string>
+    <string name="login_presentation_text">Faça login para aproveitar as funcionalidades do app!!</string>
+    <string name="login">Login</string>
+    <string name="procure_um_pokemon">Procure um Pokemon</string>
+    <string name="seus_times">Seus times</string>
+    <string name="pesquisar">Pesquisar</string>
+</resources>

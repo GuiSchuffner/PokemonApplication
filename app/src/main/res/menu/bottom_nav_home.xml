@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchPokemonFragment"
+        android:title="@string/procure_um_pokemon"
+        android:icon="@drawable/ic_baseline_search_24"/>
+    <item
+        android:id="@+id/makeTeamFragment"
+        android:title="@string/seus_times"
+        android:icon="@drawable/ic_baseline_group_24"/>
+</menu>

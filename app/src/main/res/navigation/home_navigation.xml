@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/searchPokemonFragment">
+
+    <fragment
+        android:id="@+id/searchPokemonFragment"
+        android:name="com.example.pokemonapplication.home.searchpokemon.view.SearchPokemonFragment"
+        android:label="SearchPokemonFragment" >
+        <action
+            android:id="@+id/action_searchPokemonFragment_to_makeTeamFragment"
+            app:destination="@id/makeTeamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeTeamFragment"
+        android:name="com.example.pokemonapplication.home.maketeam.view.MakeTeamFragment"
+        android:label="MakeTeamFragment" />
+</navigation>
