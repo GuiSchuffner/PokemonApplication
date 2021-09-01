@@ -27,7 +27,7 @@ class SearchPokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.searchButton.setOnClickListener {
-
+            searchPokemonViewModel.searchButtonClicked()
         }
     }
 }
