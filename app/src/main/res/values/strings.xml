@@ -10,6 +10,7 @@
     <string name="altura">Altura: </string>
     <string name="peso">Peso: </string>
     <string name="adicionar_aos_favoritos">Adicionar aos favoritos</string>
+    <string name="seus_pokemons_favoritos">Seus Pokemons favoritos</string>
     <string-array name="search_types">
         <item>Nome</item>
         <item>Tipo</item>
