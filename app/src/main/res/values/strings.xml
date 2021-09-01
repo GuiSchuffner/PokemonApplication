@@ -6,6 +6,10 @@
     <string name="seus_times">Seus times</string>
     <string name="pesquisar">Pesquisar</string>
     <string name="nome">Nome</string>
+    <string name="tipos">Tipos</string>
+    <string name="altura">Altura: </string>
+    <string name="peso">Peso: </string>
+    <string name="adicionar_aos_favoritos">Adicionar aos favoritos</string>
     <string-array name="search_types">
         <item>Nome</item>
         <item>Tipo</item>
