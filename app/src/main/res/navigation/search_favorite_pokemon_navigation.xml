@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_favorite_pokemon_navigation"
+    app:startDestination="@id/searchPokemonFragment3">
+    <fragment
+        android:id="@+id/searchPokemonFragment3"
+        android:name="com.example.pokemonapplication.home.searchpokemon.view.SearchPokemonFragment"
+        android:label="SearchPokemonFragment" >
+        <action
+            android:id="@+id/action_searchPokemonFragment3_to_searchPokemonNameFragment"
+            app:destination="@id/searchPokemonNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPokemonNameFragment"
+        android:name="com.example.pokemonapplication.home.searchpokemon.view.SearchPokemonNameFragment"
+        android:label="SearchPokemonNameFragment" >
+        <argument
+            android:name="searchText"
+            app:argType="string" />
+    </fragment>
+</navigation>

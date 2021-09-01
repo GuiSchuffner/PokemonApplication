@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapplication.databinding.ActivityLoginBinding
-import com.example.pokemonapplication.home.HomeActivity
+import com.example.pokemonapplication.home.searchpokemon.view.HomeActivity
 import com.firebase.ui.auth.AuthUI
 
 class LoginActivity : AppCompatActivity() {

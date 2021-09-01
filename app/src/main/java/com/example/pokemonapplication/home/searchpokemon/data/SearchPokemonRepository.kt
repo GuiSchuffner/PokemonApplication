@@ -6,9 +6,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SearchPokemonRepository(private val pokeApi: PokeApi) {
-    suspend fun searchPokemon(): Pokemon {
+    suspend fun searchPokemon(pokemonName: String): Pokemon {
         return withContext(Dispatchers.IO) {
-            val response = pokeApi.getPokemon("butterfree")
+            val response = pokeApi.getPokemon(pokemonName)
             if (response.isSuccessful) {
                 return@withContext response.body()!!
             } else {

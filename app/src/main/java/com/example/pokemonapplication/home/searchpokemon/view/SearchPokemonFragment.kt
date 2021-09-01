@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonBinding
 import com.example.pokemonapplication.home.searchpokemon.presentation.SearchPokemonViewModel
@@ -35,10 +36,17 @@ class SearchPokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.autoCompleteTextView.addTextChangedListener {
-
+            searchPokemonViewModel.onSearchTypeChanged(it.toString())
+        }
+        binding.searchPokeomonTextfieldEditText.addTextChangedListener {
+            searchPokemonViewModel.onSearchTextChanged(it.toString())
         }
         binding.searchButton.setOnClickListener {
-            searchPokemonViewModel.searchButtonClicked()
+            val direction =
+                SearchPokemonFragmentDirections.actionSearchPokemonFragment3ToSearchPokemonNameFragment(
+                    binding.searchPokeomonTextfieldEditText.text.toString()
+                )
+            findNavController().navigate(direction)
         }
     }
 }

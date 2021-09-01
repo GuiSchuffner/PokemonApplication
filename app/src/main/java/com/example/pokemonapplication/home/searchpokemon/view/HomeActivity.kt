@@ -1,4 +1,4 @@
-package com.example.pokemonapplication.home
+package com.example.pokemonapplication.home.searchpokemon.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
