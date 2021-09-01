@@ -12,6 +12,7 @@
             android:id="@+id/action_searchPokemonFragment_to_makeTeamFragment"
             app:destination="@id/makeTeamFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/makeTeamFragment"
         android:name="com.example.pokemonapplication.home.maketeam.view.MakeTeamFragment"
