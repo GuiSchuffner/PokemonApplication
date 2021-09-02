@@ -11,4 +11,5 @@
     <color name="secondary_red">#CC0000</color>
     <color name="blue">#3B4CCA</color>
     <color name="grayExpense">#9E9E9E</color>
+    <color name="grayLow">#EDEDED</color>
 </resources>

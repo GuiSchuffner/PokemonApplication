@@ -10,11 +10,8 @@ import com.example.pokemonapplication.home.favorites.data.SearchPokemonRepositor
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class SearchPokemonViewModel(
-    ) : ViewModel() {
+class SearchPokemonViewModel() : ViewModel() {
 
-    private val _pokemon= MutableLiveData<Pokemon>()
-    val pokemon: LiveData<Pokemon> = _pokemon
     private var searchText: String = ""
     private var searchType: String = SEARCH_POKEMON_NAME
 
