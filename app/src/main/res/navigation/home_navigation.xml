@@ -10,6 +10,14 @@
         android:label="MakeTeamFragment" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.pokemonapplication.home.searchpokemon.view.FavoritesFragment"
-        android:label="FavoritesFragment" />
+        android:name="com.example.pokemonapplication.home.favorites.view.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_searchFavoritePokemonActivity"
+            app:destination="@id/searchFavoritePokemonActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/searchFavoritePokemonActivity"
+        android:name="com.example.pokemonapplication.home.favorites.view.SearchFavoritePokemonActivity"
+        android:label="SearchFavoritePokemonActivity" />
 </navigation>

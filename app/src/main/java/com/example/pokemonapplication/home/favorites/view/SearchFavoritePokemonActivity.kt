@@ -1,4 +1,4 @@
-package com.example.pokemonapplication.home.searchpokemon.view
+package com.example.pokemonapplication.home.favorites.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,5 +10,6 @@ class SearchFavoritePokemonActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchFavoritePokemonBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

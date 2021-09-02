@@ -1,21 +1,29 @@
-package com.example.pokemonapplication.home.searchpokemon.view
+package com.example.pokemonapplication.home.favorites.view
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonNameBinding
-import com.example.pokemonapplication.home.searchpokemon.presentation.SearchPokemonViewModel
+import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonNameViewModel
+import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonViewModel
+import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SearchPokemonNameFragment: Fragment() {
     private var _binding: FragmentSearchPokemonNameBinding? = null
     private val binding get() = _binding!!
     private val arguments by navArgs<SearchPokemonNameFragmentArgs>()
-    private val searchPokemonViewModel by viewModel<SearchPokemonViewModel>()
+    private val searchNamePokemonViewModel: SearchPokemonNameViewModel by viewModel {
+        parametersOf(arguments.searchText)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,11 +34,14 @@ class SearchPokemonNameFragment: Fragment() {
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        searchPokemonViewModel.pokemon.observe(viewLifecycleOwner) {
+        searchNamePokemonViewModel.loading.observe(viewLifecycleOwner){
+            binding.loading.isVisible=it
+        }
+        searchNamePokemonViewModel.pokemon.observe(viewLifecycleOwner) {
             binding.pokemonName.text=it.name
+            Picasso.get().load(it.sprites.front_default).into(binding.pokemonImage)
             binding.pokemonHeightValueText.text=it.height.toString()
             binding.pokemonWeightValueText.text=it.weight.toString()
         }
-        searchPokemonViewModel.searchButtonClicked(arguments.searchText)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.pokemonapplication.home.searchpokemon.view
+package com.example.pokemonapplication.home.favorites.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonBinding
-import com.example.pokemonapplication.home.searchpokemon.presentation.SearchPokemonViewModel
+import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchPokemonFragment : Fragment() {

@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.searchpokemon.view.HomeActivity"/>
+        <activity android:name=".home.HomeActivity"/>
+        <activity android:name=".home.favorites.view.SearchFavoritePokemonActivity"/>
     </application>
 
 </manifest>

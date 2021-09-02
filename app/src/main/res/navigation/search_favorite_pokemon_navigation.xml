@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/search_favorite_pokemon_navigation"
-    app:startDestination="@id/searchPokemonFragment3">
+    app:startDestination="@id/searchPokemonFragment">
     <fragment
-        android:id="@+id/searchPokemonFragment3"
-        android:name="com.example.pokemonapplication.home.searchpokemon.view.SearchPokemonFragment"
+        android:id="@+id/searchPokemonFragment"
+        android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonFragment"
         android:label="SearchPokemonFragment" >
         <action
             android:id="@+id/action_searchPokemonFragment3_to_searchPokemonNameFragment"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchPokemonNameFragment"
-        android:name="com.example.pokemonapplication.home.searchpokemon.view.SearchPokemonNameFragment"
+        android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonNameFragment"
         android:label="SearchPokemonNameFragment" >
         <argument
             android:name="searchText"

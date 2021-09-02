@@ -69,14 +69,14 @@ data class PokemonType(
 )
 
 data class PokemonSprites(
-    val backDefault: String?,
-    val backShiny: String?,
-    val frontDefault: String?,
-    val frontShiny: String?,
-    val backFemale: String?,
-    val backShinyFemale: String?,
+    val back_default: String?,
+    val back_shiny: String?,
+    val front_default: String?,
+    val front_shiny: String?,
+    val back_female: String?,
+    val back_shiny_female: String?,
     val frontFemale: String?,
-    val frontShinyFemale: String?
+    val front_shiny_female: String?
 )
 
 data class TypePokemon(
