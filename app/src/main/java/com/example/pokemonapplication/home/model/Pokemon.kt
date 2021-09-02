@@ -79,9 +79,31 @@ data class PokemonSprites(
     val front_shiny_female: String?
 )
 
+data class Type(
+    val id: Int,
+    val name: String,
+    val damageRelations: TypeRelations,
+    val gameIndices: List<GenerationGameIndex>,
+    val generation: NamedApiResource,
+    val moveDamageClass: NamedApiResource?,
+    val names: List<Name>,
+    val pokemon: List<TypePokemon>,
+    val moves: List<NamedApiResource>
+)
+
+data class GenerationGameIndex(
+    val gameIndex: Int,
+    val generation: NamedApiResource
+)
+
 data class TypePokemon(
     val slot: Int,
     val pokemon: NamedApiResource
+)
+
+data class Name(
+    val name: String,
+    val language: NamedApiResource
 )
 
 data class TypeRelations(

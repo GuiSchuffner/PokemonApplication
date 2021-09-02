@@ -42,8 +42,21 @@ class SearchPokemonFragment : Fragment() {
             searchPokemonViewModel.onSearchTextChanged(it.toString())
         }
         binding.searchButton.setOnClickListener {
+            searchPokemonViewModel.onSearchButtonClicked()
+        }
+        searchPokemonViewModel.isSearchButtonEnable.observe(viewLifecycleOwner){
+            binding.searchButton.isEnabled = it
+        }
+        searchPokemonViewModel.searchByName.observe(viewLifecycleOwner){
             val direction =
                 SearchPokemonFragmentDirections.actionSearchPokemonFragment3ToSearchPokemonNameFragment(
+                    binding.searchPokeomonTextfieldEditText.text.toString()
+                )
+            findNavController().navigate(direction)
+        }
+        searchPokemonViewModel.searchByType.observe(viewLifecycleOwner){
+            val direction =
+                SearchPokemonFragmentDirections.actionSearchPokemonFragmentToSearchPokemonTypeFragment(
                     binding.searchPokeomonTextfieldEditText.text.toString()
                 )
             findNavController().navigate(direction)

@@ -5,7 +5,7 @@ import com.example.pokemonapplication.home.model.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SearchPokemonRepository(private val pokeApi: PokeApi) {
+class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
     suspend fun searchPokemon(pokemonName: String): Pokemon {
         return withContext(Dispatchers.IO) {
             val response = pokeApi.getPokemon(pokemonName)

@@ -1,6 +1,7 @@
 package com.example.pokemonapplication.home.api
 
 import com.example.pokemonapplication.home.model.Pokemon
+import com.example.pokemonapplication.home.model.Type
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -16,6 +17,11 @@ interface PokeApi {
     suspend fun getPokemon(
         @Path("name") name: String
     ): Response<Pokemon>
+
+    @GET("type/{name}/")
+    suspend fun getType(
+        @Path("name") name: String
+    ): Response<Type>
 
     companion object{
         private const val BASE_URL="https://pokeapi.co/api/v2/"

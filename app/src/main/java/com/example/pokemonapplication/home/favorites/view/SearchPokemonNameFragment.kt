@@ -45,6 +45,9 @@ class SearchPokemonNameFragment: Fragment() {
             binding.pokemonWeightValueText.text=it.weight.toString()
             bindPokemonTypes(it)
         }
+        binding.addToFavorites.setOnClickListener {
+            searchNamePokemonViewModel.onFavoriteButtonClicked()
+        }
     }
 
     private fun bindPokemonTypes(pokemon: Pokemon) {

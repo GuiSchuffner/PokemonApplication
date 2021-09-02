@@ -10,11 +10,22 @@
         <action
             android:id="@+id/action_searchPokemonFragment3_to_searchPokemonNameFragment"
             app:destination="@id/searchPokemonNameFragment" />
+        <action
+            android:id="@+id/action_searchPokemonFragment_to_searchPokemonTypeFragment"
+            app:destination="@id/searchPokemonTypeFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchPokemonNameFragment"
         android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonNameFragment"
         android:label="SearchPokemonNameFragment" >
+        <argument
+            android:name="searchText"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPokemonTypeFragment"
+        android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonTypeFragment"
+        android:label="SearchPokemonTypeFragment" >
         <argument
             android:name="searchText"
             app:argType="string" />
