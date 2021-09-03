@@ -18,13 +18,16 @@ class SearchPokemonNameViewModel (
     val pokemon: LiveData<Pokemon> = _pokemon
     private val _loading= MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
+    private val _isFavButtonEnable= MutableLiveData<Boolean>()
+    val isFavButtonEnable: LiveData<Boolean> = _isFavButtonEnable
 
     init{
+        _isFavButtonEnable.postValue(false)
         searchPokemonName()
     }
 
     fun onFavoriteButtonClicked(){
-
+        searchPokemonNameRepository.addPokemonToFavorites(_pokemon.value!!.id)
     }
 
     private fun searchPokemonName() {
@@ -32,6 +35,7 @@ class SearchPokemonNameViewModel (
         viewModelScope.launch {
             try {
                 _pokemon.postValue(searchPokemonNameRepository.searchPokemon(pokemonName))
+                _isFavButtonEnable.postValue(true)
             } catch(e: Exception){
                 Log.e("aaa", e.message!!)
             }

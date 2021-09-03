@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SearchPokemonTypeRepository(private val pokeApi: PokeApi) {
+
     suspend fun searchPokemonType(pokemonType: String): Type {
         return withContext(Dispatchers.IO) {
             val response = pokeApi.getType(pokemonType)

@@ -12,16 +12,18 @@ import androidx.navigation.fragment.navArgs
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonNameBinding
 import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonNameViewModel
-import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonViewModel
 import com.example.pokemonapplication.home.model.Pokemon
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+
 class SearchPokemonNameFragment: Fragment() {
+
     private var _binding: FragmentSearchPokemonNameBinding? = null
     private val binding get() = _binding!!
     private val arguments by navArgs<SearchPokemonNameFragmentArgs>()
+
     private val searchNamePokemonViewModel: SearchPokemonNameViewModel by viewModel {
         parametersOf(arguments.searchText)
     }
@@ -35,9 +37,14 @@ class SearchPokemonNameFragment: Fragment() {
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         searchNamePokemonViewModel.loading.observe(viewLifecycleOwner){
             binding.loading.isVisible=it
         }
+        searchNamePokemonViewModel.isFavButtonEnable.observe(viewLifecycleOwner) {
+            binding.addToFavorites.isEnabled=it
+        }
+
         searchNamePokemonViewModel.pokemon.observe(viewLifecycleOwner) {
             binding.pokemonName.text=it.name
             Picasso.get().load(it.sprites.front_default).into(binding.pokemonImage)
@@ -47,6 +54,7 @@ class SearchPokemonNameFragment: Fragment() {
         }
         binding.addToFavorites.setOnClickListener {
             searchNamePokemonViewModel.onFavoriteButtonClicked()
+            requireActivity().finish()
         }
     }
 
