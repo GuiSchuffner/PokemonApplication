@@ -9,8 +9,10 @@
     <string name="tipos">Tipos</string>
     <string name="altura">Altura: </string>
     <string name="peso">Peso: </string>
+    <string name="adicionar_ao_time">Adicionar ao time: </string>
     <string name="adicionar_aos_favoritos">Adicionar aos favoritos</string>
     <string name="seus_pokemons_favoritos">Seus Pokemons favoritos</string>
+    <string name="adicionar_pokemon">Adicionar Pokemon</string>
     <string-array name="search_types">
         <item>Nome</item>
         <item>Tipo</item>

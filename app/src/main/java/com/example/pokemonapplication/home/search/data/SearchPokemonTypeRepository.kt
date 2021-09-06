@@ -1,4 +1,4 @@
-package com.example.pokemonapplication.home.favorites.data
+package com.example.pokemonapplication.home.search.data
 
 import com.example.pokemonapplication.home.api.PokeApi
 import com.example.pokemonapplication.home.model.Type

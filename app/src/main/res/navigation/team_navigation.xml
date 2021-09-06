@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/team_navigation"
+    app:startDestination="@id/pokemonTeamFragment">
+
+    <fragment
+        android:id="@+id/pokemonTeamFragment"
+        android:name="com.example.pokemonapplication.home.teams.team.view.PokemonTeamFragment"
+        android:label="PokemonTeamFragment">
+        <action
+            android:id="@+id/action_pokemonTeamFragment_to_searchPokemonActivity2"
+            app:destination="@id/searchPokemonActivity2" />
+    </fragment>
+    <activity
+        android:id="@+id/searchPokemonActivity2"
+        android:name="com.example.pokemonapplication.home.search.view.SearchPokemonActivity"
+        android:label="SearchPokemonActivity">
+        <argument
+            android:name="searchIntent"
+            app:argType="integer" />
+        <argument
+            android:name="teamId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </activity>
+</navigation>

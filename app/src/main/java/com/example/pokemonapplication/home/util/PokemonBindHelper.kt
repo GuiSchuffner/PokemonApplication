@@ -1,4 +1,4 @@
-package com.example.pokemonapplication.home.favorites.view.util
+package com.example.pokemonapplication.home.util
 
 import android.widget.ImageView
 import com.example.pokemonapplication.R

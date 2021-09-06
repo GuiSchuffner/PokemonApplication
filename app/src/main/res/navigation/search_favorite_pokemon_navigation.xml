@@ -5,26 +5,39 @@
     app:startDestination="@id/searchPokemonFragment">
     <fragment
         android:id="@+id/searchPokemonFragment"
-        android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonFragment"
-        android:label="SearchPokemonFragment" >
+        android:name="com.example.pokemonapplication.home.search.view.SearchPokemonFragment"
+        android:label="SearchPokemonFragment">
         <action
             android:id="@+id/action_searchPokemonFragment3_to_searchPokemonNameFragment"
             app:destination="@id/searchPokemonNameFragment" />
         <action
             android:id="@+id/action_searchPokemonFragment_to_searchPokemonTypeFragment"
             app:destination="@id/searchPokemonTypeFragment" />
+        <argument
+            android:name="searchIntent"
+            app:argType="integer" />
+        <argument
+            android:name="teamId"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/searchPokemonNameFragment"
-        android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonNameFragment"
-        android:label="SearchPokemonNameFragment" >
+        android:name="com.example.pokemonapplication.home.search.view.SearchPokemonNameFragment"
+        android:label="SearchPokemonNameFragment">
         <argument
             android:name="searchText"
             app:argType="string" />
+        <argument
+            android:name="searchIntent"
+            app:argType="integer" />
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchPokemonTypeFragment"
-        android:name="com.example.pokemonapplication.home.favorites.view.SearchPokemonTypeFragment"
+        android:name="com.example.pokemonapplication.home.search.view.SearchPokemonTypeFragment"
         android:label="SearchPokemonTypeFragment" >
         <argument
             android:name="searchText"

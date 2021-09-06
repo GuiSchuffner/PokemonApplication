@@ -6,18 +6,34 @@
 
     <fragment
         android:id="@+id/pokemonTeamsFragment"
-        android:name="com.example.pokemonapplication.home.maketeam.view.PokemonTeamsFragment"
-        android:label="MakeTeamFragment" />
+        android:name="com.example.pokemonapplication.home.teams.view.PokemonTeamsFragment"
+        android:label="MakeTeamFragment">
+        <action
+            android:id="@+id/action_pokemonTeamsFragment_to_pokemonTeamActivity"
+            app:destination="@id/pokemonTeamActivity" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.pokemonapplication.home.favorites.view.FavoritesFragment"
-        android:label="FavoritesFragment" >
+        android:label="FavoritesFragment">
         <action
-            android:id="@+id/action_favoritesFragment_to_searchFavoritePokemonActivity"
-            app:destination="@id/searchFavoritePokemonActivity" />
+            android:id="@+id/action_favoritesFragment_to_searchPokemonActivity"
+            app:destination="@id/searchPokemonActivity" />
     </fragment>
     <activity
-        android:id="@+id/searchFavoritePokemonActivity"
-        android:name="com.example.pokemonapplication.home.favorites.view.SearchFavoritePokemonActivity"
-        android:label="SearchFavoritePokemonActivity" />
+        android:id="@+id/searchPokemonActivity"
+        android:name="com.example.pokemonapplication.home.search.view.SearchPokemonActivity"
+        android:label="SearchFavoritePokemonActivity">
+        <argument
+            android:name="searchIntent"
+            app:argType="integer" />
+        <argument
+            android:name="teamId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </activity>
+    <activity
+        android:id="@+id/pokemonTeamActivity"
+        android:name="com.example.pokemonapplication.home.teams.team.view.PokemonTeamActivity"
+        android:label="PokemonTeamActivity" />
 </navigation>

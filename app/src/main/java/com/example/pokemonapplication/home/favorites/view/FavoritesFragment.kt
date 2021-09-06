@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentFavoritesBinding
 import com.example.pokemonapplication.home.favorites.presentation.FavoritesViewModel
 import com.example.pokemonapplication.home.favorites.view.adapter.FavoritesListAdapter
+import com.example.pokemonapplication.home.search.view.SearchPokemonActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesFragment : Fragment() {
@@ -36,7 +36,11 @@ class FavoritesFragment : Fragment() {
             adapter.addPokemon(it)
         }
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_favoritesFragment_to_searchFavoritePokemonActivity)
+            val direction =
+                FavoritesFragmentDirections.actionFavoritesFragmentToSearchPokemonActivity(
+                    SearchPokemonActivity.SEARCH_FOR_FAVORITES
+                )
+            findNavController().navigate(direction)
         }
     }
 

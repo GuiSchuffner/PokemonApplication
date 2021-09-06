@@ -7,8 +7,8 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapplication.R
-import com.example.pokemonapplication.home.favorites.view.util.PokemonBindHelper
 import com.example.pokemonapplication.home.model.Pokemon
+import com.example.pokemonapplication.home.util.PokemonBindHelper
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
 

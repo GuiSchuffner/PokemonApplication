@@ -1,19 +1,17 @@
-package com.example.pokemonapplication.home.favorites.view
+package com.example.pokemonapplication.home.search.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonNameBinding
-import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonNameViewModel
-import com.example.pokemonapplication.home.favorites.view.util.PokemonBindHelper
 import com.example.pokemonapplication.home.model.Pokemon
+import com.example.pokemonapplication.home.search.presentation.SearchPokemonNameViewModel
+import com.example.pokemonapplication.home.util.PokemonBindHelper
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -26,7 +24,7 @@ class SearchPokemonNameFragment: Fragment() {
     private val arguments by navArgs<SearchPokemonNameFragmentArgs>()
 
     private val searchNamePokemonViewModel: SearchPokemonNameViewModel by viewModel {
-        parametersOf(arguments.searchText)
+        parametersOf(arguments.searchText, arguments.searchIntent, arguments.teamId)
     }
 
     override fun onCreateView(
@@ -35,28 +33,33 @@ class SearchPokemonNameFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchPokemonNameBinding.inflate(layoutInflater)
+        if (arguments.searchIntent == SearchPokemonActivity.SEARCH_FOR_FAVORITES) {
+            binding.addButton.text = getString(R.string.adicionar_aos_favoritos)
+        } else {
+            binding.addButton.text = getString(R.string.adicionar_ao_time)
+        }
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        searchNamePokemonViewModel.loading.observe(viewLifecycleOwner){
-            binding.loading.isVisible=it
+        searchNamePokemonViewModel.loading.observe(viewLifecycleOwner) {
+            binding.loading.isVisible = it
         }
-        searchNamePokemonViewModel.isFavButtonEnable.observe(viewLifecycleOwner) {
-            binding.addToFavorites.isEnabled=it
+        searchNamePokemonViewModel.isAddButtonEnable.observe(viewLifecycleOwner) {
+            binding.addButton.isEnabled = it
         }
-        searchNamePokemonViewModel.addToFavoritesFinished.observe(viewLifecycleOwner){
+        searchNamePokemonViewModel.addToFavoritesFinished.observe(viewLifecycleOwner) {
             requireActivity().finish()
         }
         searchNamePokemonViewModel.pokemon.observe(viewLifecycleOwner) {
-            binding.pokemonName.text=it.name
+            binding.pokemonName.text = it.name
             Picasso.get().load(it.sprites.front_default).into(binding.pokemonImage)
-            binding.pokemonHeightValueText.text=it.height.toString()
-            binding.pokemonWeightValueText.text=it.weight.toString()
+            binding.pokemonHeightValueText.text = it.height.toString()
+            binding.pokemonWeightValueText.text = it.weight.toString()
             bindPokemonTypes(it)
         }
-        binding.addToFavorites.setOnClickListener {
-            searchNamePokemonViewModel.onFavoriteButtonClicked()
+        binding.addButton.setOnClickListener {
+            searchNamePokemonViewModel.onAddButtonClicked()
         }
     }
 

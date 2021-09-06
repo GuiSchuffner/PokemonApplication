@@ -1,4 +1,4 @@
-package com.example.pokemonapplication.home.favorites.view
+package com.example.pokemonapplication.home.search.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonBinding
-import com.example.pokemonapplication.home.favorites.presentation.SearchPokemonViewModel
+import com.example.pokemonapplication.home.search.presentation.SearchPokemonViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchPokemonFragment : Fragment() {
@@ -18,6 +19,7 @@ class SearchPokemonFragment : Fragment() {
     private val searchPokemonViewModel by viewModel<SearchPokemonViewModel>()
     private var _binding: FragmentSearchPokemonBinding? = null
     private val binding get() = _binding!!
+    private val arguments by navArgs<SearchPokemonFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,16 +52,20 @@ class SearchPokemonFragment : Fragment() {
         searchPokemonViewModel.searchByName.observe(viewLifecycleOwner){
             val direction =
                 SearchPokemonFragmentDirections.actionSearchPokemonFragment3ToSearchPokemonNameFragment(
-                    binding.searchPokeomonTextfieldEditText.text.toString()
+                    binding.searchPokeomonTextfieldEditText.text.toString(),
+                    arguments.searchIntent,
+                    arguments.teamId
                 )
             findNavController().navigate(direction)
         }
-        searchPokemonViewModel.searchByType.observe(viewLifecycleOwner){
-            val direction =
-                SearchPokemonFragmentDirections.actionSearchPokemonFragmentToSearchPokemonTypeFragment(
-                    binding.searchPokeomonTextfieldEditText.text.toString()
-                )
-            findNavController().navigate(direction)
+        searchPokemonViewModel.searchByType.observe(viewLifecycleOwner) {
+            if (arguments.searchIntent == SearchPokemonActivity.SEARCH_FOR_FAVORITES) {
+                val direction =
+                    SearchPokemonFragmentDirections.actionSearchPokemonFragmentToSearchPokemonTypeFragment(
+                        binding.searchPokeomonTextfieldEditText.text.toString()
+                    )
+                findNavController().navigate(direction)
+            }
         }
     }
 }
