@@ -18,6 +18,11 @@ interface PokeApi {
         @Path("name") name: String
     ): Response<Pokemon>
 
+    @GET("pokemon/{id}/")
+    suspend fun getPokemon(
+        @Path("id") id: Int
+    ): Response<Pokemon>
+
     @GET("type/{name}/")
     suspend fun getType(
         @Path("name") name: String

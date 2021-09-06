@@ -1,6 +1,7 @@
 package com.example.pokemonapplication
 
 import com.example.pokemonapplication.home.api.PokeApi
+import com.example.pokemonapplication.home.favorites.data.FavoritesRepository
 import com.example.pokemonapplication.home.favorites.data.SearchPokemonNameRepository
 import com.example.pokemonapplication.home.favorites.data.SearchPokemonTypeRepository
 import com.example.pokemonapplication.home.favorites.presentation.FavoritesViewModel
@@ -21,7 +22,7 @@ val initialModule = module{
         SearchPokemonTypeViewModel(pokemonType, get())
     }
     viewModel {
-        FavoritesViewModel()
+        FavoritesViewModel(get())
     }
     factory {
         PokeApi.create()
@@ -31,5 +32,8 @@ val initialModule = module{
     }
     factory {
         SearchPokemonTypeRepository(get())
+    }
+    factory {
+        FavoritesRepository(get())
     }
 }

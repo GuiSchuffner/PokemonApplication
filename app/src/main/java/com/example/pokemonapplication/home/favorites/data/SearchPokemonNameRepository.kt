@@ -1,6 +1,5 @@
 package com.example.pokemonapplication.home.favorites.data
 
-import android.util.Log
 import com.example.pokemonapplication.home.api.PokeApi
 import com.example.pokemonapplication.home.model.Pokemon
 import com.google.firebase.auth.FirebaseAuth
@@ -8,7 +7,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 
 class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
 
@@ -18,6 +16,7 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
             val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
             databaseReference.child("favorites").get().addOnSuccessListener {
                 val favoritesIds = addToFavList(pokemonId, it.getValue<List<Int>>())
+                it.getValue<Int>()
                 databaseReference.child("favorites").setValue(favoritesIds)
             }.addOnFailureListener {
                 throw it
