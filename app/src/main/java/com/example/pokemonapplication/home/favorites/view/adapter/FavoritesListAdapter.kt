@@ -26,14 +26,11 @@ class FavoritesListAdapter(
         return pokemonList.size
     }
 
-    fun resetDataBase(){
-        pokemonList= mutableListOf()
-        notifyDataSetChanged()
-    }
-
     fun addPokemon(pokemon: Pokemon) {
-        pokemonList.add(pokemon)
-        notifyItemChanged(itemCount-1)
+        if(!pokemonList.contains(pokemon)){
+            pokemonList.add(pokemon)
+            notifyItemChanged(itemCount-1)
+        }
     }
 
     override fun onBindViewHolder(holder: FavoritesItemViewHolder, position: Int) {

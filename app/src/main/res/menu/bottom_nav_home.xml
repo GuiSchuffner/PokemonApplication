@@ -5,7 +5,7 @@
         android:title="@string/seus_pokemons_favoritos"
         android:icon="@drawable/ic_baseline_search_24"/>
     <item
-        android:id="@+id/makeTeamFragment"
+        android:id="@+id/pokemonTeamsFragment"
         android:title="@string/seus_times"
         android:icon="@drawable/ic_baseline_group_24"/>
 </menu>

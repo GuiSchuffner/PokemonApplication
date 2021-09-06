@@ -45,7 +45,9 @@ class SearchPokemonNameFragment: Fragment() {
         searchNamePokemonViewModel.isFavButtonEnable.observe(viewLifecycleOwner) {
             binding.addToFavorites.isEnabled=it
         }
-
+        searchNamePokemonViewModel.addToFavoritesFinished.observe(viewLifecycleOwner){
+            requireActivity().finish()
+        }
         searchNamePokemonViewModel.pokemon.observe(viewLifecycleOwner) {
             binding.pokemonName.text=it.name
             Picasso.get().load(it.sprites.front_default).into(binding.pokemonImage)
@@ -55,7 +57,6 @@ class SearchPokemonNameFragment: Fragment() {
         }
         binding.addToFavorites.setOnClickListener {
             searchNamePokemonViewModel.onFavoriteButtonClicked()
-            requireActivity().finish()
         }
     }
 

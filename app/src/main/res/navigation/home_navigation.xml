@@ -5,8 +5,8 @@
     app:startDestination="@id/favoritesFragment">
 
     <fragment
-        android:id="@+id/makeTeamFragment"
-        android:name="com.example.pokemonapplication.home.maketeam.view.MakeTeamFragment"
+        android:id="@+id/pokemonTeamsFragment"
+        android:name="com.example.pokemonapplication.home.maketeam.view.PokemonTeamsFragment"
         android:label="MakeTeamFragment" />
     <fragment
         android:id="@+id/favoritesFragment"

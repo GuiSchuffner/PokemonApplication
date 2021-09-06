@@ -17,7 +17,7 @@ class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
     private val favoritesViewModel by viewModel<FavoritesViewModel>()
-    val adapter = FavoritesListAdapter(mutableListOf())
+    private val adapter = FavoritesListAdapter(mutableListOf())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +40,9 @@ class FavoritesFragment : Fragment() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
-        adapter.resetDataBase()
         favoritesViewModel.getPokemonList()
     }
 }

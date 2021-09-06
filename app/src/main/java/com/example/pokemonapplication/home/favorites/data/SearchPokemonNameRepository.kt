@@ -6,20 +6,30 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
 
-    fun addPokemonToFavorites(pokemonId: Int){
+    suspend fun addPokemonToFavorites(pokemonId: Int){
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if(userId != null){
             val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
-            databaseReference.child("favorites").get().addOnSuccessListener {
+            /*databaseReference.child("favorites").get().addOnSuccessListener {
                 val favoritesIds = addToFavList(pokemonId, it.getValue<List<Int>>())
-                it.getValue<Int>()
                 databaseReference.child("favorites").setValue(favoritesIds)
             }.addOnFailureListener {
                 throw it
+            }*/
+            val pokemonList = databaseReference.child("favorites")
+                .get().await().getValue<List<Int>>()
+            if(pokemonList != null){
+                val newList = pokemonList.toMutableList()
+                newList.add(pokemonId)
+                databaseReference.child("favorites").setValue(newList)
+            }
+            else{
+                databaseReference.child("favorites").setValue(listOf(pokemonId))
             }
         }
     }
