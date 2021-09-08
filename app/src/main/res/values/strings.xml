@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pokemon Application</string>
+    <string name="app_name">Poke App</string>
     <string name="login_presentation_text">Faça login para aproveitar as funcionalidades do app!!</string>
     <string name="login">Login</string>
     <string name="procure_um_pokemon">Procure um Pokemon</string>
@@ -13,6 +13,8 @@
     <string name="adicionar_aos_favoritos">Adicionar aos favoritos</string>
     <string name="seus_pokemons_favoritos">Seus Pokemons favoritos</string>
     <string name="adicionar_pokemon">Adicionar Pokemon</string>
+    <string name="qual_o_nome_voc_quer_dar_para_esse_time">Qual o nome você quer dar para esse time ?</string>
+    <string name="criar_time">Criar Time</string>
     <string-array name="search_types">
         <item>Nome</item>
         <item>Tipo</item>

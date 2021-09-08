@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.11388888888888889" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/activity_home.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/activity_new_pokemon_team.xml" value="0.20052083333333334" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_favorites.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_make_fragment.xml" value="0.1796875" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_make_team.xml" value="0.22" />
+        <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_new_pokemon_team.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_pokemon_team.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_pokemon_teams.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_result_search_pokemon.xml" value="0.22" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_show_pokemon.xml" value="0.1796875" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/fragment_teams_search_pokemon_name.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/pokemon_list_item.xml" value="0.1" />
+        <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/pokemon_team_pokemon_item.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/layout/team_pokemon_list_item.xml" value="0.4742489270386266" />
         <entry key="..\:/Users/guilherme.schuffner/AndroidStudioProjects/PokemonApplication/app/src/main/res/menu/bottom_nav_home.xml" value="0.1796875" />
       </map>

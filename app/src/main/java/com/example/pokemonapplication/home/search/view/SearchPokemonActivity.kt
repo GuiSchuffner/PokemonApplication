@@ -15,6 +15,9 @@ class SearchPokemonActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchPokemonBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbarPokemonSearch.setNavigationOnClickListener {
+            onBackPressed()
+        }
         findNavController(R.id.nav_search_favorite_pokemon_fragment)
             .setGraph(R.navigation.search_favorite_pokemon_navigation, arguments.toBundle())
     }

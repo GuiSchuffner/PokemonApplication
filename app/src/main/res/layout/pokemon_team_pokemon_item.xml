@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toEndOf="@+id/list_item_pokemon_image"
-            android:textSize="14sp"
+            android:textSize="20sp"
             tools:text="Pikachu" />
 
         <ImageView

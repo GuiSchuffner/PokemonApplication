@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/new_pokemon_team_navigation"
+    app:startDestination="@id/newPokemonTeamFragment">
+
+    <fragment
+        android:id="@+id/newPokemonTeamFragment"
+        android:name="com.example.pokemonapplication.home.teams.team.view.NewPokemonTeamFragment"
+        android:label="NewPokemonTeamFragment">
+        <action
+            android:id="@+id/action_newPokemonTeamFragment_to_pokemonTeamActivity2"
+            app:destination="@id/pokemonTeamActivity2" />
+    </fragment>
+    <activity
+        android:id="@+id/pokemonTeamActivity2"
+        android:name="com.example.pokemonapplication.home.teams.team.view.PokemonTeamActivity"
+        android:label="PokemonTeamActivity">
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
+    </activity>
+</navigation>

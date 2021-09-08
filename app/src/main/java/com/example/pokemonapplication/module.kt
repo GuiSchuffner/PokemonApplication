@@ -8,7 +8,9 @@ import com.example.pokemonapplication.home.search.data.SearchPokemonTypeReposito
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonNameViewModel
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonTypeViewModel
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonViewModel
+import com.example.pokemonapplication.home.teams.team.data.NewPokemonTeamRepository
 import com.example.pokemonapplication.home.teams.team.data.PokemonTeamRepository
+import com.example.pokemonapplication.home.teams.team.presentation.NewPokemonTeamViewModel
 import com.example.pokemonapplication.home.teams.team.presentation.PokemonTeamViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -26,8 +28,11 @@ val initialModule = module{
     viewModel {
         FavoritesViewModel(get())
     }
+    viewModel { (teamId: Int) ->
+        PokemonTeamViewModel(teamId, get())
+    }
     viewModel {
-        PokemonTeamViewModel(get())
+        NewPokemonTeamViewModel(get())
     }
     factory {
         PokeApi.create()
@@ -43,5 +48,8 @@ val initialModule = module{
     }
     factory {
         PokemonTeamRepository(get())
+    }
+    factory {
+        NewPokemonTeamRepository()
     }
 }

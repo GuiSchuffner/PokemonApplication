@@ -26,7 +26,7 @@ class PokemonTeamsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.newTeamButton.setOnClickListener {
             findNavController().navigate(
-                PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToPokemonTeamActivity()
+                PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToNewPokemonTeamActivity()
             )
         }
     }

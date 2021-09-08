@@ -21,6 +21,7 @@
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".home.search.view.SearchPokemonActivity" />
         <activity android:name=".home.teams.team.view.PokemonTeamActivity" />
+        <activity android:name=".home.teams.team.view.NewPokemonTeamActivity" />
     </application>
 
 </manifest>

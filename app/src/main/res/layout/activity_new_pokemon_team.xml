@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_pokemon_team"
+        android:id="@+id/toolbar_new_pokemon_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -14,16 +14,18 @@
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:navigationIconTint="@color/white"
         android:background="@color/secondary_red"
-        app:title="Time Pokemon"
+        app:title="Novo Time Pokemon"
         app:titleCentered="true"
         app:titleTextColor="@color/white" />
 
     <fragment
-        android:id="@+id/nav_pokemon_team_fragment"
+        android:id="@+id/nav_new_pokemon_team_fragment"
         android:layout_width="match_parent"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_new_pokemon_team"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_pokemon_team" />
+        app:navGraph="@navigation/new_pokemon_team_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

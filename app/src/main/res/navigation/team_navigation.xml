@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_pokemonTeamFragment_to_searchPokemonActivity2"
             app:destination="@id/searchPokemonActivity2" />
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
     </fragment>
     <activity
         android:id="@+id/searchPokemonActivity2"

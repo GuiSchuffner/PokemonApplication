@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_pokemonTeamsFragment_to_pokemonTeamActivity"
             app:destination="@id/pokemonTeamActivity" />
+        <action
+            android:id="@+id/action_pokemonTeamsFragment_to_newPokemonTeamActivity"
+            app:destination="@id/newPokemonTeamActivity" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -35,5 +38,13 @@
     <activity
         android:id="@+id/pokemonTeamActivity"
         android:name="com.example.pokemonapplication.home.teams.team.view.PokemonTeamActivity"
-        android:label="PokemonTeamActivity" />
+        android:label="PokemonTeamActivity">
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
+    </activity>
+    <activity
+        android:id="@+id/newPokemonTeamActivity"
+        android:name="com.example.pokemonapplication.home.teams.team.view.NewPokemonTeamActivity"
+        android:label="NewPokemonTeamActivity" />
 </navigation>

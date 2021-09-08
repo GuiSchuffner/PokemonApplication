@@ -10,47 +10,40 @@ import com.example.pokemonapplication.home.teams.team.data.PokemonTeamRepository
 import kotlinx.coroutines.launch
 
 class PokemonTeamViewModel(
+    private val teamId: Int,
     private val pokemonTeamRepository: PokemonTeamRepository
 ) : ViewModel() {
 
-    private val _teamId = MutableLiveData<Int>()
-    val teamId: LiveData<Int> = _teamId
     private val _isAddButtonEnable = MutableLiveData<Boolean>()
     val isAddButtonEnable: LiveData<Boolean> = _isAddButtonEnable
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
-    private val _newPokemon = MutableLiveData<Pokemon>()
-    val newPokemon: LiveData<Pokemon> = _newPokemon
+    private val _pokemonTeam = MutableLiveData<List<Pokemon>>()
+    val pokemonTeam: LiveData<List<Pokemon>> = _pokemonTeam
 
     init {
-        _isAddButtonEnable.postValue(true)
-        _teamId.postValue(0)
+        getPokemonTeam()
     }
 
-    fun createTeam() {
+    fun getPokemonTeam() {
         _loading.postValue(true)
+        _isAddButtonEnable.postValue(false)
         viewModelScope.launch {
-            _teamId.postValue(pokemonTeamRepository.createTeam("time"))
+            val pokeTeam = pokemonTeamRepository.getTeam(teamId)
+            searchPokemon(pokeTeam)
             _isAddButtonEnable.postValue(true)
             _loading.postValue(false)
         }
     }
 
-    fun getPokemonTeam() {
-        viewModelScope.launch {
-            val pokeTeam = pokemonTeamRepository.getTeam(0)
-            searchPokemon(pokeTeam)
-        }
-    }
-
     private suspend fun searchPokemon(pokemonTeam: PokemonTeam?) {
+        val pokemonList = mutableListOf<Pokemon>()
         if (pokemonTeam?.pokemonList != null) {
             for (pokemonId in pokemonTeam.pokemonList!!) {
-                _newPokemon.postValue(
-                    pokemonTeamRepository.searchPokemon(pokemonId)
-                )
+                pokemonList.add(pokemonTeamRepository.searchPokemon(pokemonId))
             }
         }
+        _pokemonTeam.postValue(pokemonList)
     }
 
 }
