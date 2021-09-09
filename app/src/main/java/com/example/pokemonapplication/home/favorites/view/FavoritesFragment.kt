@@ -36,7 +36,10 @@ class FavoritesFragment : Fragment() {
         favoritesViewModel.loading.observe(viewLifecycleOwner) {
             binding.loading.isVisible = it
         }
-        resources
+        favoritesViewModel.isFavListEmpty.observe(viewLifecycleOwner) {
+            binding.favoritesRecyclerView.isVisible = !it
+            binding.favoritesIsEmptyConstraint.isVisible = it
+        }
         favoritesViewModel.newPokemon.observe(viewLifecycleOwner) {
             adapter.addPokemon(it)
         }

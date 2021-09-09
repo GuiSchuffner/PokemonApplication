@@ -38,7 +38,11 @@ class TeamListAdapter(
 
         fun bindListItem(team: PokemonTeam) {
             teamName.text = team.name
-            numberOfPokemon.text = team.pokemonList?.size.toString()
+            if (team.pokemonList != null) {
+                numberOfPokemon.text = team.pokemonList?.size.toString()
+            } else {
+                numberOfPokemon.text = "0"
+            }
             if (team.captainImage != null) {
                 Picasso.get().load(team.captainImage).into(captainImage)
             }

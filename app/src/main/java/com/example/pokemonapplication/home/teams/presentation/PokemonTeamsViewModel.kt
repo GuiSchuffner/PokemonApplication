@@ -30,9 +30,9 @@ class PokemonTeamsViewModel(
                 val list = pokemonTeamsRepository.getTeam()
                 if (list != null) {
                     _teamsList.postValue(list)
-                    _isTeamsListEmpty.postValue(true)
-                } else {
                     _isTeamsListEmpty.postValue(false)
+                } else {
+                    _isTeamsListEmpty.postValue(true)
                 }
             } catch (e: Exception) {
 

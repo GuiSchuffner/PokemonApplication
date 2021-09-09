@@ -7,24 +7,30 @@ import androidx.lifecycle.viewModelScope
 import com.example.pokemonapplication.home.favorites.data.FavoritesRepository
 import com.example.pokemonapplication.home.model.Pokemon
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class FavoritesViewModel(
     private val favoritesRepository: FavoritesRepository
     ): ViewModel() {
 
-    private val _loading= MutableLiveData<Boolean>()
+    private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
-    private val _newPokemon =  MutableLiveData<Pokemon>()
+    private val _newPokemon = MutableLiveData<Pokemon>()
     val newPokemon: LiveData<Pokemon> = _newPokemon
+    private val _isFavListEmpty = MutableLiveData<Boolean>()
+    val isFavListEmpty: LiveData<Boolean> = _isFavListEmpty
 
 
-    fun getPokemonList(){
+    fun getPokemonList() {
         _loading.postValue(true)
         viewModelScope.launch {
             try {
                 val pokemonList = favoritesRepository.getFavorites()
-                searchPokemon(pokemonList)
+                if (pokemonList != null) {
+                    _isFavListEmpty.postValue(false)
+                    searchPokemon(pokemonList)
+                } else {
+                    _isFavListEmpty.postValue(true)
+                }
             } catch (e: Exception){
 
             }

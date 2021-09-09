@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.pokemonapplication.databinding.FragmentPokemonTeamsBinding
@@ -30,6 +31,13 @@ class PokemonTeamsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         pokemonTeamsViewModel.teamsList.observe(viewLifecycleOwner) {
             binding.pokemonTeamRecyclerView.adapter = TeamListAdapter(it)
+        }
+        pokemonTeamsViewModel.loading.observe(viewLifecycleOwner) {
+            binding.loading.isVisible = it
+        }
+        pokemonTeamsViewModel.isTeamsListEmpty.observe(viewLifecycleOwner) {
+            binding.pokemonTeamRecyclerView.isVisible = !it
+            binding.teamsListIsEmptyConstraint.isVisible = it
         }
         binding.newTeamButton.setOnClickListener {
             findNavController().navigate(
