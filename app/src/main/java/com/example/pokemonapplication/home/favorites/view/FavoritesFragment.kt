@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.pokemonapplication.databinding.FragmentFavoritesBinding
@@ -30,9 +31,13 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.favoritesRecyclerView.adapter=adapter
+        binding.favoritesRecyclerView.adapter = adapter
         favoritesViewModel.getPokemonList()
-        favoritesViewModel.newPokemon.observe(viewLifecycleOwner){
+        favoritesViewModel.loading.observe(viewLifecycleOwner) {
+            binding.loading.isVisible = it
+        }
+        resources
+        favoritesViewModel.newPokemon.observe(viewLifecycleOwner) {
             adapter.addPokemon(it)
         }
         binding.floatingActionButton.setOnClickListener {

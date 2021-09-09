@@ -11,7 +11,7 @@ import com.example.pokemonapplication.R
 import com.example.pokemonapplication.databinding.FragmentSearchPokemonNameBinding
 import com.example.pokemonapplication.home.model.Pokemon
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonNameViewModel
-import com.example.pokemonapplication.home.util.PokemonBindHelper
+import com.example.pokemonapplication.home.util.PokemonHelper
 import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -48,6 +48,10 @@ class SearchPokemonNameFragment: Fragment() {
         searchNamePokemonViewModel.isAddButtonEnable.observe(viewLifecycleOwner) {
             binding.addButton.isEnabled = it
         }
+        searchNamePokemonViewModel.isPokemonFound.observe(viewLifecycleOwner) {
+            binding.pokemonNotFoundConstraint.isVisible = !it
+            binding.pokemonInfoCard.isVisible = it
+        }
         searchNamePokemonViewModel.addToFavoritesFinished.observe(viewLifecycleOwner) {
             requireActivity().finish()
         }
@@ -64,11 +68,11 @@ class SearchPokemonNameFragment: Fragment() {
     }
 
     private fun bindPokemonTypes(pokemon: Pokemon) {
-        PokemonBindHelper.bindPokemonTypeImageView(
+        PokemonHelper.bindPokemonTypeImageView(
             pokemon.types[0].type.name, binding.pokemonTypeImage1
         )
         if(pokemon.types.size==2) {
-            PokemonBindHelper.bindPokemonTypeImageView(
+            PokemonHelper.bindPokemonTypeImageView(
                 pokemon.types[1].type.name, binding.pokemonTypeImage2
             )
         }

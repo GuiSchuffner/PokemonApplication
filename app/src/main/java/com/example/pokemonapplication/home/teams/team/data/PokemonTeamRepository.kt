@@ -12,29 +12,6 @@ import kotlinx.coroutines.withContext
 
 class PokemonTeamRepository(private val pokeApi: PokeApi) {
 
-    suspend fun createTeam(teamName: String): Int {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
-            val pokemonList = databaseReference.child("teams")
-                .get().await().getValue<List<PokemonTeam>>()
-            return if (pokemonList != null) {
-                val list = pokemonList.toMutableList()
-                list.add(PokemonTeam(teamName, listOf()))
-                databaseReference.child("teams").setValue(
-                    list
-                )
-                list.size - 1
-            } else {
-                val team = PokemonTeam(teamName, listOf())
-                databaseReference.child("teams").setValue(listOf(team))
-                0
-            }
-        } else {
-            throw Exception("Usuário não encontrado")
-        }
-    }
-
     suspend fun getTeam(teamId: Int): PokemonTeam? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {

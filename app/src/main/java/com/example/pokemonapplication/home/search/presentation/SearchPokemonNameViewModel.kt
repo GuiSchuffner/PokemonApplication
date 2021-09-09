@@ -20,6 +20,8 @@ class SearchPokemonNameViewModel(
     val pokemon: LiveData<Pokemon> = _pokemon
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
+    private val _isPokemonFound = MutableLiveData<Boolean>()
+    val isPokemonFound: LiveData<Boolean> = _isPokemonFound
     private val _isAddButtonEnable = MutableLiveData<Boolean>()
     val isAddButtonEnable: LiveData<Boolean> = _isAddButtonEnable
     private val _addToFavoritesFinished = MutableLiveData<Unit>()
@@ -37,7 +39,11 @@ class SearchPokemonNameViewModel(
                 if (searchIntent == SearchPokemonActivity.SEARCH_FOR_FAVORITES) {
                     searchPokemonNameRepository.addPokemonToFavorites(_pokemon.value!!.id)
                 } else {
-                    searchPokemonNameRepository.addPokemonToTeam(_pokemon.value!!.id, teamId)
+                    searchPokemonNameRepository.addPokemonToTeam(
+                        _pokemon.value!!.sprites.front_default,
+                        _pokemon.value!!.id,
+                        teamId
+                    )
                 }
                 _addToFavoritesFinished.postValue(Unit)
             } catch (e: Exception) {
@@ -52,7 +58,13 @@ class SearchPokemonNameViewModel(
         _loading.postValue(true)
         viewModelScope.launch {
             try {
-                _pokemon.postValue(searchPokemonNameRepository.searchPokemon(pokemonName))
+                val response = searchPokemonNameRepository.searchPokemon(pokemonName)
+                if (response == null) {
+                    _isPokemonFound.postValue(false)
+                } else {
+                    _pokemon.postValue(response)
+                    _isPokemonFound.postValue(true)
+                }
                 _isAddButtonEnable.postValue(true)
             } catch(e: Exception){
                 Log.e("aaa", e.message!!)

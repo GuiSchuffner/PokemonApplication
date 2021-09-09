@@ -3,6 +3,7 @@ package com.example.pokemonapplication.home.search.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.pokemonapplication.home.util.SingleLiveEvent
 
 class SearchPokemonViewModel : ViewModel() {
 
@@ -10,9 +11,9 @@ class SearchPokemonViewModel : ViewModel() {
     private var searchType: String = SEARCH_POKEMON_NAME
     private val _isSearchButtonEnable = MutableLiveData<Boolean>()
     val isSearchButtonEnable: LiveData<Boolean> = _isSearchButtonEnable
-    private val _searchByName = MutableLiveData<Unit>()
+    private val _searchByName = SingleLiveEvent<Unit>()
     val searchByName: LiveData<Unit> = _searchByName
-    private val _searchByType = MutableLiveData<Unit>()
+    private val _searchByType = SingleLiveEvent<Unit>()
     val searchByType: LiveData<Unit> = _searchByType
 
     init {

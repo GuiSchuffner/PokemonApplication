@@ -30,7 +30,7 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
         }
     }
 
-    suspend fun addPokemonToTeam(pokemonId: Int, teamId: Int) {
+    suspend fun addPokemonToTeam(imageUrl: String?, pokemonId: Int, teamId: Int) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
@@ -42,6 +42,7 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
                     newList.add(pokemonId)
                     teamList[teamId].pokemonList = newList
                 } else {
+                    teamList[teamId].captainImage = imageUrl
                     teamList[teamId].pokemonList = listOf(pokemonId)
                 }
                 databaseReference.child("teams").setValue(teamList).await()
@@ -51,14 +52,24 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
         }
     }
 
-    suspend fun searchPokemon(pokemonName: String): Pokemon {
+    suspend fun searchPokemon(pokemonName: String): Pokemon? {
         return withContext(Dispatchers.IO) {
             val response = pokeApi.getPokemon(pokemonName)
-            if (response.isSuccessful) {
-                return@withContext response.body()!!
-            } else {
-                throw Exception("Não foi possível realizar o acesso")
+            when {
+                response.isSuccessful -> {
+                    return@withContext response.body()
+                }
+                response.code() == POKEMON_NOT_FOUND -> {
+                    return@withContext null
+                }
+                else -> {
+                    throw Exception("Não foi possível realizar o acesso")
+                }
             }
         }
+    }
+
+    companion object {
+        private const val POKEMON_NOT_FOUND = 404
     }
 }

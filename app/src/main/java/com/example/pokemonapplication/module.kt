@@ -8,6 +8,8 @@ import com.example.pokemonapplication.home.search.data.SearchPokemonTypeReposito
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonNameViewModel
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonTypeViewModel
 import com.example.pokemonapplication.home.search.presentation.SearchPokemonViewModel
+import com.example.pokemonapplication.home.teams.data.PokemonTeamsRepository
+import com.example.pokemonapplication.home.teams.presentation.PokemonTeamsViewModel
 import com.example.pokemonapplication.home.teams.team.data.NewPokemonTeamRepository
 import com.example.pokemonapplication.home.teams.team.data.PokemonTeamRepository
 import com.example.pokemonapplication.home.teams.team.presentation.NewPokemonTeamViewModel
@@ -33,6 +35,12 @@ val initialModule = module{
     }
     viewModel {
         NewPokemonTeamViewModel(get())
+    }
+    viewModel {
+        PokemonTeamsViewModel(get())
+    }
+    factory {
+        PokemonTeamsRepository()
     }
     factory {
         PokeApi.create()

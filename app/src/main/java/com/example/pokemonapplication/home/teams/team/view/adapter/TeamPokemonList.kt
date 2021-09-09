@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.home.model.Pokemon
-import com.example.pokemonapplication.home.util.PokemonBindHelper
+import com.example.pokemonapplication.home.util.PokemonHelper
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
 
@@ -45,12 +45,12 @@ class TeamPokemonListAdapter(
         fun bindListItem(pokemon: Pokemon) {
             pokemonName.text = pokemon.name
             Picasso.get().load(pokemon.sprites.front_default).into(pokemonImage)
-            PokemonBindHelper.bindPokemonTypeImageView(
+            PokemonHelper.bindPokemonTypeImageView(
                 pokemon.types[0].type.name, pokemonType1
             )
             if (pokemon.types.size == 2) {
                 pokemonType2.isVisible = true
-                PokemonBindHelper.bindPokemonTypeImageView(
+                PokemonHelper.bindPokemonTypeImageView(
                     pokemon.types[1].type.name, pokemonType2
                 )
             } else {

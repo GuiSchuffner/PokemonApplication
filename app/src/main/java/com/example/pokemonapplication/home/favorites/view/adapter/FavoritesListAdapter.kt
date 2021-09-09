@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.home.model.Pokemon
-import com.example.pokemonapplication.home.util.PokemonBindHelper
+import com.example.pokemonapplication.home.util.PokemonHelper
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
 
@@ -51,23 +52,30 @@ class FavoritesListAdapter(
             itemView.findViewById(R.id.list_item_pokemon_type_image1)
         private val pokemonType2: ImageView =
             itemView.findViewById(R.id.list_item_pokemon_type_image2)
+        private val pokemonConstraint =
+            itemView.findViewById<ConstraintLayout>(R.id.list_item_pokemon_constraint)
 
         fun bindListItem(pokemon: Pokemon) {
-            pokemonName.text=pokemon.name
+            pokemonName.text = pokemon.name
             Picasso.get().load(pokemon.sprites.front_default).into(pokemonImage)
-            pokemonHeight.text=pokemon.height.toString()
-            pokemonWeight.text=pokemon.weight.toString()
-            PokemonBindHelper.bindPokemonTypeImageView(
-                pokemon.types[0].type.name, pokemonType1
+            pokemonHeight.text = pokemon.height.toString()
+            pokemonWeight.text = pokemon.weight.toString()
+            PokemonHelper.bindPokemonTypeColorCardView(
+                pokemon.types[0].type.name,
+                pokemonConstraint,
+                itemView
             )
-            if(pokemon.types.size==2){
-                pokemonType2.isVisible=true
-                PokemonBindHelper.bindPokemonTypeImageView(
+            PokemonHelper.bindPokemonTypeImageView(
+                pokemon.types[0].type.name,
+                pokemonType1
+            )
+            if (pokemon.types.size == 2) {
+                pokemonType2.isVisible = true
+                PokemonHelper.bindPokemonTypeImageView(
                     pokemon.types[1].type.name, pokemonType2
                 )
-            }
-            else{
-                pokemonType2.isVisible=false
+            } else {
+                pokemonType2.isVisible = false
             }
         }
     }

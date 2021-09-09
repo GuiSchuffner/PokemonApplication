@@ -12,5 +12,8 @@ class NewPokemonTeamActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewPokemonTeamBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbarNewPokemonTeam.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 }
