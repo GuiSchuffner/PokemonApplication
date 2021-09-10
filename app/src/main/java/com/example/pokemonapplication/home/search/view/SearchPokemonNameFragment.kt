@@ -60,6 +60,11 @@ class SearchPokemonNameFragment: Fragment() {
             Picasso.get().load(it.sprites.front_default).into(binding.pokemonImage)
             binding.pokemonHeightValueText.text = it.height.toString()
             binding.pokemonWeightValueText.text = it.weight.toString()
+            PokemonHelper.bindPokemonTypeColorCardView(
+                it.types[0].type.name,
+                binding.pokemonInfoCardConstraint,
+                view
+            )
             bindPokemonTypes(it)
         }
         binding.addButton.setOnClickListener {
