@@ -58,7 +58,7 @@ class SearchPokemonNameViewModel(
         _loading.postValue(true)
         viewModelScope.launch {
             try {
-                val response = searchPokemonNameRepository.searchPokemon(pokemonName)
+                val response = searchPokemonNameRepository.searchPokemon(pokemonName.lowercase())
                 if (response == null) {
                     _isPokemonFound.postValue(false)
                 } else {

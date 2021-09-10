@@ -3,23 +3,27 @@ package com.example.pokemonapplication.home.teams.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.home.model.PokemonTeam
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
-import com.squareup.picasso.Picasso
 
-class TeamListAdapter(
-    private var pokemonList: List<PokemonTeam>
-) : RecyclerView.Adapter<TeamListAdapter.TeamViewHolder>() {
+class TeamsListAdapter(
+    private var pokemonList: List<PokemonTeam>,
+    private val teamListener: SelectTeamListener
+) : RecyclerView.Adapter<TeamsListAdapter.TeamViewHolder>() {
+
+    interface SelectTeamListener {
+        fun teamSelectListener(position: Int)
+    }
 
     override fun getItemCount(): Int {
         return pokemonList.size
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
-        holder.bindListItem(pokemonList[position])
+        holder.bindListItem(pokemonList[position], teamListener, position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
@@ -33,18 +37,21 @@ class TeamListAdapter(
             itemView.findViewById<MaterialTextView>(R.id.team_name_textview)
         private val numberOfPokemon =
             itemView.findViewById<MaterialTextView>(R.id.number_pokemon_value_textview)
-        private val captainImage: ImageView =
-            itemView.findViewById(R.id.captain_image)
+        private val cardView = itemView.findViewById<MaterialCardView>(R.id.team_item_cardView)
 
-        fun bindListItem(team: PokemonTeam) {
-            teamName.text = team.name
+        fun bindListItem(team: PokemonTeam, teamListener: SelectTeamListener, position: Int) {
+            teamName.text = team.name?.replaceFirstChar {
+                it.uppercase()
+            }
+            cardView.isClickable = true
+            cardView.isFocusable = true
+            cardView.setOnClickListener {
+                teamListener.teamSelectListener(position)
+            }
             if (team.pokemonList != null) {
                 numberOfPokemon.text = team.pokemonList?.size.toString()
             } else {
                 numberOfPokemon.text = "0"
-            }
-            if (team.captainImage != null) {
-                Picasso.get().load(team.captainImage).into(captainImage)
             }
         }
     }

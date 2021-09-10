@@ -5,6 +5,5 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class PokemonTeam(
     var name: String? = null,
-    var pokemonList: List<Int>? = null,
-    var captainImage: String? = null
+    var pokemonList: List<Int>? = null
 )

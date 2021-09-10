@@ -21,6 +21,7 @@
     <string name="add_pokemon_favorites_description_text">Para adicionar pokemons ao seus favoritos clique no botão no canto inferior direito.</string>
     <string name="create_team_text">Você ainda não criou um time.</string>
     <string name="create_team_description_text">Para criar um time de pokemons clique no botão no canto inferior direito.</string>
+    <string name="ok">OK</string>
     <string-array name="search_types">
         <item>Nome</item>
         <item>Tipo</item>

@@ -33,4 +33,25 @@ class PokemonTeamRepository(private val pokeApi: PokeApi) {
         }
     }
 
+    suspend fun removePokemon(teamId: Int, pokemonId: Int) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null) {
+            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
+            val pokemonList = databaseReference.child("teams")
+                .get().await().getValue<List<PokemonTeam>>()
+            if (pokemonList != null) {
+                val newList = pokemonList[teamId].pokemonList!!.toMutableList()
+                newList.remove(pokemonId)
+                pokemonList[teamId].pokemonList = newList
+                databaseReference.child("teams").setValue(
+                    pokemonList
+                ).await()
+            } else {
+                throw Exception("Teams not found")
+            }
+        } else {
+            throw Exception("User not found")
+        }
+    }
+
 }

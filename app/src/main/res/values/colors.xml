@@ -30,4 +30,5 @@
     <color name="grass">#78C850</color>
     <color name="ground">#E0C068</color>
     <color name="dragon">#7038F8</color>
+    <color name="trans">#00000000</color>
 </resources>

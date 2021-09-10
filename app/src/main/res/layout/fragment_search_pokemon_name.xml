@@ -127,7 +127,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="14dp"
                 android:text="@string/adicionar_aos_favoritos"
-                android:textColor="@color/primary_red"
+                android:textColor="@color/black"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Icon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

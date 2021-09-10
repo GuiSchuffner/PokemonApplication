@@ -56,7 +56,9 @@ class FavoritesListAdapter(
             itemView.findViewById<ConstraintLayout>(R.id.list_item_pokemon_constraint)
 
         fun bindListItem(pokemon: Pokemon) {
-            pokemonName.text = pokemon.name
+            pokemonName.text = pokemon.name.replaceFirstChar {
+                it.uppercase()
+            }
             Picasso.get().load(pokemon.sprites.front_default).into(pokemonImage)
             pokemonHeight.text = pokemon.height.toString()
             pokemonWeight.text = pokemon.weight.toString()

@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.pokemonapplication.databinding.FragmentPokemonTeamsBinding
 import com.example.pokemonapplication.home.teams.presentation.PokemonTeamsViewModel
-import com.example.pokemonapplication.home.teams.view.adapter.TeamListAdapter
+import com.example.pokemonapplication.home.teams.view.adapter.TeamsListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PokemonTeamsFragment : Fragment() {
+class PokemonTeamsFragment : Fragment(), TeamsListAdapter.SelectTeamListener {
 
     private var _binding: FragmentPokemonTeamsBinding? = null
     private val binding get() = _binding!!
@@ -30,7 +30,7 @@ class PokemonTeamsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pokemonTeamsViewModel.teamsList.observe(viewLifecycleOwner) {
-            binding.pokemonTeamRecyclerView.adapter = TeamListAdapter(it)
+            binding.pokemonTeamRecyclerView.adapter = TeamsListAdapter(it, this)
         }
         pokemonTeamsViewModel.loading.observe(viewLifecycleOwner) {
             binding.loading.isVisible = it
@@ -44,5 +44,11 @@ class PokemonTeamsFragment : Fragment() {
                 PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToNewPokemonTeamActivity()
             )
         }
+    }
+
+    override fun teamSelectListener(position: Int) {
+        findNavController().navigate(
+            PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToPokemonTeamActivity(position)
+        )
     }
 }

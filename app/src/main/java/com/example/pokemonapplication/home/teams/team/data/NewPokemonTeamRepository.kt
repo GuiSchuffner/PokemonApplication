@@ -18,11 +18,11 @@ class NewPokemonTeamRepository {
                 list.add(PokemonTeam(teamName, listOf()))
                 databaseReference.child("teams").setValue(
                     list
-                )
+                ).await()
                 list.size - 1
             } else {
                 val team = PokemonTeam(teamName, listOf())
-                databaseReference.child("teams").setValue(listOf(team))
+                databaseReference.child("teams").setValue(listOf(team)).await()
                 0
             }
         } else {

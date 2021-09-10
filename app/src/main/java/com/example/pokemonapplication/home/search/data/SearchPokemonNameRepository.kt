@@ -42,7 +42,6 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
                     newList.add(pokemonId)
                     teamList[teamId].pokemonList = newList
                 } else {
-                    teamList[teamId].captainImage = imageUrl
                     teamList[teamId].pokemonList = listOf(pokemonId)
                 }
                 databaseReference.child("teams").setValue(teamList).await()

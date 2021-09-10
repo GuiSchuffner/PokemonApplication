@@ -56,7 +56,9 @@ class SearchPokemonNameFragment: Fragment() {
             requireActivity().finish()
         }
         searchNamePokemonViewModel.pokemon.observe(viewLifecycleOwner) {
-            binding.pokemonName.text = it.name
+            binding.pokemonName.text = it.name.replaceFirstChar { char ->
+                char.uppercase()
+            }
             Picasso.get().load(it.sprites.front_default).into(binding.pokemonImage)
             binding.pokemonHeightValueText.text = it.height.toString()
             binding.pokemonWeightValueText.text = it.weight.toString()
