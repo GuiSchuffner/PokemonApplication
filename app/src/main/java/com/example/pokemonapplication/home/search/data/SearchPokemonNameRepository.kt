@@ -30,7 +30,7 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
         }
     }
 
-    suspend fun addPokemonToTeam(imageUrl: String?, pokemonId: Int, teamId: Int) {
+    suspend fun addPokemonToTeam(pokemonId: Int, teamId: Int) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             val databaseReference = FirebaseDatabase.getInstance().getReference(userId)

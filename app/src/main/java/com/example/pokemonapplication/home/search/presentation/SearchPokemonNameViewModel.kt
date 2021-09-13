@@ -40,7 +40,6 @@ class SearchPokemonNameViewModel(
                     searchPokemonNameRepository.addPokemonToFavorites(_pokemon.value!!.id)
                 } else {
                     searchPokemonNameRepository.addPokemonToTeam(
-                        _pokemon.value!!.sprites.front_default,
                         _pokemon.value!!.id,
                         teamId
                     )

@@ -38,9 +38,15 @@
     <fragment
         android:id="@+id/searchPokemonTypeFragment"
         android:name="com.example.pokemonapplication.home.search.view.SearchPokemonTypeFragment"
-        android:label="SearchPokemonTypeFragment" >
+        android:label="SearchPokemonTypeFragment">
         <argument
             android:name="searchText"
             app:argType="string" />
+        <argument
+            android:name="searchIntent"
+            app:argType="integer" />
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
     </fragment>
 </navigation>

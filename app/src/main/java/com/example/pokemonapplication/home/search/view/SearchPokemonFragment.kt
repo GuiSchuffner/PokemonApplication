@@ -62,7 +62,9 @@ class SearchPokemonFragment : Fragment() {
             if (arguments.searchIntent == SearchPokemonActivity.SEARCH_FOR_FAVORITES) {
                 val direction =
                     SearchPokemonFragmentDirections.actionSearchPokemonFragmentToSearchPokemonTypeFragment(
-                        binding.searchPokeomonTextfieldEditText.text.toString()
+                        binding.searchPokeomonTextfieldEditText.text.toString(),
+                        arguments.searchIntent,
+                        arguments.teamId
                     )
                 findNavController().navigate(direction)
             }
