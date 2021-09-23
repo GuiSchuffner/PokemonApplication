@@ -15,7 +15,7 @@ class TeamsListAdapter(
 ) : RecyclerView.Adapter<TeamsListAdapter.TeamViewHolder>() {
 
     interface SelectTeamListener {
-        fun teamSelectListener(position: Int)
+        fun teamSelectListener(teamName: String)
     }
 
     override fun getItemCount(): Int {
@@ -23,7 +23,7 @@ class TeamsListAdapter(
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
-        holder.bindListItem(pokemonList[position], teamListener, position)
+        holder.bindListItem(pokemonList[position], teamListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
@@ -35,23 +35,17 @@ class TeamsListAdapter(
     class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val teamName =
             itemView.findViewById<MaterialTextView>(R.id.team_name_textview)
-        private val numberOfPokemon =
-            itemView.findViewById<MaterialTextView>(R.id.number_pokemon_value_textview)
+        private val teamDescription: MaterialTextView =
+            itemView.findViewById(R.id.team_description_textview)
         private val cardView = itemView.findViewById<MaterialCardView>(R.id.team_item_cardView)
 
-        fun bindListItem(team: PokemonTeam, teamListener: SelectTeamListener, position: Int) {
-            teamName.text = team.name?.replaceFirstChar {
-                it.uppercase()
-            }
+        fun bindListItem(team: PokemonTeam, teamListener: SelectTeamListener) {
+            teamName.text = team.name
+            teamDescription.text = team.description
             cardView.isClickable = true
             cardView.isFocusable = true
             cardView.setOnClickListener {
-                teamListener.teamSelectListener(position)
-            }
-            if (team.pokemonList != null) {
-                numberOfPokemon.text = team.pokemonList?.size.toString()
-            } else {
-                numberOfPokemon.text = "0"
+                teamListener.teamSelectListener(team.name!!)
             }
         }
     }

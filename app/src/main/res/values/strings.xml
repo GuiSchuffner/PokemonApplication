@@ -13,7 +13,7 @@
     <string name="adicionar_aos_favoritos">Adicionar aos favoritos</string>
     <string name="seus_pokemons_favoritos">Seus Pokemons favoritos</string>
     <string name="adicionar_pokemon">Adicionar Pokemon</string>
-    <string name="qual_o_nome_voc_quer_dar_para_esse_time">Qual o nome você quer dar para esse time ?</string>
+    <string name="qual_o_nome_voc_quer_dar_para_esse_time">Qual o nome e descrição você quer dar para esse time ?</string>
     <string name="criar_time">Criar Time</string>
     <string name="n_mero_de_pokemons">Número de Pokemons:</string>
     <string name="n_mero_de_pokemon">Número de Pokemon:</string>
@@ -22,6 +22,8 @@
     <string name="create_team_text">Você ainda não criou um time.</string>
     <string name="create_team_description_text">Para criar um time de pokemons clique no botão no canto inferior direito.</string>
     <string name="ok">OK</string>
+    <string name="nome_hint">Nome</string>
+    <string name="description_hint">Descrição</string>
     <string-array name="search_types">
         <item>Nome</item>
         <item>Tipo</item>

@@ -5,13 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokemonapplication.home.model.Pokemon
-import com.example.pokemonapplication.home.model.PokemonTeam
 import com.example.pokemonapplication.home.teams.team.data.PokemonTeamRepository
 import com.example.pokemonapplication.home.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class PokemonTeamViewModel(
-    private val teamId: Int,
+    private val teamName: String,
     private val pokemonTeamRepository: PokemonTeamRepository
 ) : ViewModel() {
 
@@ -21,8 +20,6 @@ class PokemonTeamViewModel(
     val loading: LiveData<Boolean> = _loading
     private val _pokemonList = MutableLiveData<List<Pokemon>>()
     val pokemonList: LiveData<List<Pokemon>> = _pokemonList
-    private val _pokemonTeam = MutableLiveData<PokemonTeam>()
-    val pokemonTeam: LiveData<PokemonTeam> = _pokemonTeam
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
     private val _addPokemon = SingleLiveEvent<Unit>()
@@ -42,13 +39,8 @@ class PokemonTeamViewModel(
         _isAddButtonEnable.postValue(false)
         viewModelScope.launch {
             try {
-                val pokeTeam = pokemonTeamRepository.getTeam(teamId)
-                if (pokeTeam != null) {
-                    _pokemonTeam.postValue(pokeTeam)
-                    searchPokemon(pokeTeam)
-                } else {
-                    _error.postValue("Erro Desconhecido !")
-                }
+                val pokeTeam = pokemonTeamRepository.getTeam(teamName)
+                searchPokemon(pokeTeam)
             } catch (e: Exception) {
                 _error.postValue("Erro Desconhecido !")
             }
@@ -63,7 +55,7 @@ class PokemonTeamViewModel(
             _isAddButtonEnable.postValue(false)
             viewModelScope.launch {
                 try {
-                    pokemonTeamRepository.removePokemon(teamId, pokemonId)
+                    pokemonTeamRepository.removePokemon(teamName, pokemonId)
                     _pokemonRemoved.postValue(Unit)
                 } catch (e: Exception) {
                     _error.postValue("Erro Desconhecido !")
@@ -82,10 +74,10 @@ class PokemonTeamViewModel(
         }
     }
 
-    private suspend fun searchPokemon(pokemonTeam: PokemonTeam?) {
+    private suspend fun searchPokemon(pokemonTeam: List<Int>?) {
         val newPokemonList = mutableListOf<Pokemon>()
-        pokemonListSize = if (pokemonTeam?.pokemonList != null) {
-            for (pokemonId in pokemonTeam.pokemonList!!) {
+        pokemonListSize = if (pokemonTeam != null) {
+            for (pokemonId in pokemonTeam) {
                 newPokemonList.add(pokemonTeamRepository.searchPokemon(pokemonId))
             }
             newPokemonList.size

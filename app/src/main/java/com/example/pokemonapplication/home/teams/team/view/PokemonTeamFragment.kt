@@ -23,7 +23,7 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
     private val binding get() = _binding!!
     private val arguments by navArgs<PokemonTeamFragmentArgs>()
     private val pokemonTeamViewModel: PokemonTeamViewModel by viewModel {
-        parametersOf(arguments.teamId)
+        parametersOf(arguments.teamName)
     }
 
     override fun onCreateView(
@@ -37,11 +37,9 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.teamNameTextView.text = arguments.teamName
         pokemonTeamViewModel.isAddButtonEnable.observe(viewLifecycleOwner) {
             binding.addPokemonButton.isEnabled = it
-        }
-        pokemonTeamViewModel.pokemonTeam.observe(viewLifecycleOwner) {
-            binding.teamNameTextView.text = it.name
         }
         pokemonTeamViewModel.loading.observe(viewLifecycleOwner) {
             binding.loading.isVisible = it
@@ -60,7 +58,7 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
             val direction =
                 PokemonTeamFragmentDirections.actionPokemonTeamFragmentToSearchPokemonActivity2(
                     SearchPokemonActivity.SEARCH_FOR_TEAM,
-                    arguments.teamId
+                    arguments.teamName
                 )
             findNavController().navigate(direction)
         }

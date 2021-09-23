@@ -33,9 +33,12 @@ class NewPokemonTeamFragment : Fragment() {
             binding.buttonCreateTeam.isEnabled = !it
         }
         binding.buttonCreateTeam.setOnClickListener {
-            newPokemonTeamViewModel.onCreateTeamButton(binding.teamNameEdittext.text.toString())
+            newPokemonTeamViewModel.onCreateTeamButton(
+                binding.teamNameEdittext.text.toString(),
+                binding.teamDescriptionEdittext.text.toString()
+            )
         }
-        newPokemonTeamViewModel.newTeamId.observe(viewLifecycleOwner) {
+        newPokemonTeamViewModel.newTeamName.observe(viewLifecycleOwner) {
             val direction = NewPokemonTeamFragmentDirections
                 .actionNewPokemonTeamFragmentToPokemonTeamActivity2(it)
             findNavController().navigate(direction)

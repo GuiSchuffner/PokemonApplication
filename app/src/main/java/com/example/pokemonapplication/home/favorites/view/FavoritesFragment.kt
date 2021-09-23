@@ -46,7 +46,8 @@ class FavoritesFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             val direction =
                 FavoritesFragmentDirections.actionFavoritesFragmentToSearchPokemonActivity(
-                    SearchPokemonActivity.SEARCH_FOR_FAVORITES
+                    SearchPokemonActivity.SEARCH_FOR_FAVORITES,
+                    null
                 )
             findNavController().navigate(direction)
         }

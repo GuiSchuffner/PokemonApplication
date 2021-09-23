@@ -2,7 +2,6 @@ package com.example.pokemonapplication.home.search.data
 
 import com.example.pokemonapplication.home.api.PokeApi
 import com.example.pokemonapplication.home.model.Pokemon
-import com.example.pokemonapplication.home.model.PokemonTeam
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
@@ -15,7 +14,8 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
     suspend fun addPokemonToFavorites(pokemonId: Int){
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if(userId != null){
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
+            val databaseReference =
+                FirebaseDatabase.getInstance().getReference("users").child(userId)
             val pokemonList = databaseReference.child("favorites")
                 .get().await().getValue<List<Int>>()
             if (pokemonList != null) {
@@ -30,21 +30,19 @@ class SearchPokemonNameRepository(private val pokeApi: PokeApi) {
         }
     }
 
-    suspend fun addPokemonToTeam(pokemonId: Int, teamId: Int) {
+    suspend fun addPokemonToTeam(pokemon: Pokemon, teamName: String) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
-            val teamList = databaseReference.child("teams")
-                .get().await().getValue<List<PokemonTeam>>()
-            if (teamList != null && teamList.size > teamId) {
-                if (teamList[teamId].pokemonList != null) {
-                    val newList = teamList[teamId].pokemonList!!.toMutableList()
-                    newList.add(pokemonId)
-                    teamList[teamId].pokemonList = newList
-                } else {
-                    teamList[teamId].pokemonList = listOf(pokemonId)
-                }
-                databaseReference.child("teams").setValue(teamList).await()
+            val databaseReference = FirebaseDatabase.getInstance()
+                .getReference("users").child(userId).child("teams").child(teamName)
+            val teamList = databaseReference
+                .get().await().getValue<List<Int>>()
+            if (teamList != null) {
+                val newList = teamList.toMutableList()
+                newList.add(pokemon.id)
+                databaseReference.setValue(newList).await()
+            } else {
+                databaseReference.setValue(listOf(pokemon.id)).await()
             }
         } else {
             throw Exception("Erro Desconhecido")

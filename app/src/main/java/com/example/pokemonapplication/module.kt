@@ -21,8 +21,8 @@ val initialModule = module{
     viewModel {
         SearchPokemonViewModel()
     }
-    viewModel { (pokemonName: String, searchIntent: Int, teamId: Int) ->
-        SearchPokemonNameViewModel(pokemonName, searchIntent, teamId, get())
+    viewModel { (pokemonName: String, searchIntent: Int, teamName: String) ->
+        SearchPokemonNameViewModel(pokemonName, searchIntent, teamName, get())
     }
     viewModel { (searchIntent: Int, teamId: Int, pokemonType: String) ->
         SearchPokemonTypeViewModel(searchIntent, teamId, pokemonType, get())
@@ -30,8 +30,8 @@ val initialModule = module{
     viewModel {
         FavoritesViewModel(get())
     }
-    viewModel { (teamId: Int) ->
-        PokemonTeamViewModel(teamId, get())
+    viewModel { (teamName: String) ->
+        PokemonTeamViewModel(teamName, get())
     }
     viewModel {
         NewPokemonTeamViewModel(get())

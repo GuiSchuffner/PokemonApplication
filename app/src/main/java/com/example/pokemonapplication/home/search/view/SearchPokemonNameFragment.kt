@@ -24,7 +24,7 @@ class SearchPokemonNameFragment: Fragment() {
     private val arguments by navArgs<SearchPokemonNameFragmentArgs>()
 
     private val searchNamePokemonViewModel: SearchPokemonNameViewModel by viewModel {
-        parametersOf(arguments.searchText, arguments.searchIntent, arguments.teamId)
+        parametersOf(arguments.searchText, arguments.searchIntent, arguments.teamName)
     }
 
     override fun onCreateView(

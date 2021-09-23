@@ -2,7 +2,6 @@ package com.example.pokemonapplication.home.teams.team.data
 
 import com.example.pokemonapplication.home.api.PokeApi
 import com.example.pokemonapplication.home.model.Pokemon
-import com.example.pokemonapplication.home.model.PokemonTeam
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
@@ -12,12 +11,13 @@ import kotlinx.coroutines.withContext
 
 class PokemonTeamRepository(private val pokeApi: PokeApi) {
 
-    suspend fun getTeam(teamId: Int): PokemonTeam? {
+    suspend fun getTeam(teamName: String): List<Int>? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
-            return databaseReference.child("teams")
-                .get().await().getValue<List<PokemonTeam>>()?.get(teamId)
+            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+                .child(userId).child("teams").child(teamName)
+            return databaseReference
+                .get().await().getValue<List<Int>>()
         }
         return null
     }
@@ -33,18 +33,18 @@ class PokemonTeamRepository(private val pokeApi: PokeApi) {
         }
     }
 
-    suspend fun removePokemon(teamId: Int, pokemonId: Int) {
+    suspend fun removePokemon(teamName: String, pokemonId: Int) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
-            val pokemonList = databaseReference.child("teams")
-                .get().await().getValue<List<PokemonTeam>>()
+            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+                .child(userId).child("teams").child(teamName)
+            val pokemonList = databaseReference
+                .get().await().getValue<List<Int>>()
             if (pokemonList != null) {
-                val newList = pokemonList[teamId].pokemonList!!.toMutableList()
+                val newList = pokemonList.toMutableList()
                 newList.remove(pokemonId)
-                pokemonList[teamId].pokemonList = newList
-                databaseReference.child("teams").setValue(
-                    pokemonList
+                databaseReference.setValue(
+                    newList
                 ).await()
             } else {
                 throw Exception("Teams not found")

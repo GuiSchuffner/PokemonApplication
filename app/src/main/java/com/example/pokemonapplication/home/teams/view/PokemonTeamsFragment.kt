@@ -46,9 +46,9 @@ class PokemonTeamsFragment : Fragment(), TeamsListAdapter.SelectTeamListener {
         }
     }
 
-    override fun teamSelectListener(position: Int) {
+    override fun teamSelectListener(teamName: String) {
         findNavController().navigate(
-            PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToPokemonTeamActivity(position)
+            PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToPokemonTeamActivity(teamName)
         )
     }
 }

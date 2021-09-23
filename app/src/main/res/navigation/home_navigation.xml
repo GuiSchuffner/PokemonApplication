@@ -31,17 +31,18 @@
             android:name="searchIntent"
             app:argType="integer" />
         <argument
-            android:name="teamId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:name="teamName"
+            app:argType="string"
+            app:nullable="true" />
     </activity>
     <activity
         android:id="@+id/pokemonTeamActivity"
         android:name="com.example.pokemonapplication.home.teams.team.view.PokemonTeamActivity"
         android:label="PokemonTeamActivity">
         <argument
-            android:name="teamId"
-            app:argType="integer" />
+            android:name="teamName"
+            app:argType="string"
+            app:nullable="true" />
     </activity>
     <activity
         android:id="@+id/newPokemonTeamActivity"

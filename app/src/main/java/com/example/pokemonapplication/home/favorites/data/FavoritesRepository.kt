@@ -14,7 +14,8 @@ class FavoritesRepository(private val pokeApi: PokeApi) {
     suspend fun getFavorites() : List<Int>? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if(userId != null){
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
+            val databaseReference =
+                FirebaseDatabase.getInstance().getReference("users").child(userId)
             return databaseReference.child("favorites").get().await().getValue<List<Int>>()
         }
         return listOf()

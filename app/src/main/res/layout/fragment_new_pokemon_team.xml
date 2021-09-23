@@ -25,6 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/name_new_pokemon_team_textview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/nome_hint"
         app:counterEnabled="true"
         app:counterMaxLength="10"
         android:layout_margin="14dp">
@@ -37,11 +38,32 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/team_description_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintTop_toBottomOf="@+id/team_name_input_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:counterEnabled="true"
+        app:counterMaxLength="45"
+        android:layout_margin="14dp"
+        android:hint="@string/description_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/team_description_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="45"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_create_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/team_name_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/team_description_input_layout"
         android:layout_margin="14dp"
         android:text="@string/criar_time" />
 

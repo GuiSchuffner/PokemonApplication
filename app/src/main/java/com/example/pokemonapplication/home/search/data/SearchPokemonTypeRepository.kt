@@ -2,7 +2,6 @@ package com.example.pokemonapplication.home.search.data
 
 import com.example.pokemonapplication.home.api.PokeApi
 import com.example.pokemonapplication.home.model.Pokemon
-import com.example.pokemonapplication.home.model.PokemonTeam
 import com.example.pokemonapplication.home.model.Type
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -44,7 +43,8 @@ class SearchPokemonTypeRepository(private val pokeApi: PokeApi) {
     suspend fun addPokemonToFavorites(pokemonId: Int) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
+            val databaseReference =
+                FirebaseDatabase.getInstance().getReference("users").child(userId)
             val pokemonList = databaseReference.child("favorites")
                 .get().await().getValue<List<Int>>()
             if (pokemonList != null) {
@@ -60,7 +60,7 @@ class SearchPokemonTypeRepository(private val pokeApi: PokeApi) {
     }
 
     suspend fun addPokemonToTeam(pokemonId: Int, teamId: Int) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        /*val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
             val teamList = databaseReference.child("teams")
@@ -77,7 +77,7 @@ class SearchPokemonTypeRepository(private val pokeApi: PokeApi) {
             }
         } else {
             throw Exception("Erro Desconhecido")
-        }
+        }*/
     }
 
     companion object {

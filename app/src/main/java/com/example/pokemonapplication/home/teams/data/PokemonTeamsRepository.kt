@@ -11,8 +11,9 @@ class PokemonTeamsRepository {
     suspend fun getTeam(): List<PokemonTeam>? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference(userId)
-            return databaseReference.child("teams")
+            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+                .child(userId).child("teams").child("teamsList")
+            return databaseReference
                 .get().await().getValue<List<PokemonTeam>>()
         }
         return null
