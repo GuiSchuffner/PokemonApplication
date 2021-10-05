@@ -37,7 +37,7 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.teamNameTextView.text = arguments.teamName
+        binding.teamNameTextView.text = ""
         pokemonTeamViewModel.isAddButtonEnable.observe(viewLifecycleOwner) {
             binding.addPokemonButton.isEnabled = it
         }

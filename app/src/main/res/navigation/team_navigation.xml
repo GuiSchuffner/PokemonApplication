@@ -23,7 +23,7 @@
             android:name="searchIntent"
             app:argType="integer" />
         <argument
-            android:name="teamName"
+            android:name="teamId"
             app:argType="string"
             app:nullable="true" />
     </activity>

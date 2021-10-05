@@ -10,7 +10,7 @@ import com.example.pokemonapplication.home.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class PokemonTeamViewModel(
-    private val teamName: String,
+    private val teamId: String,
     private val pokemonTeamRepository: PokemonTeamRepository
 ) : ViewModel() {
 
@@ -39,7 +39,7 @@ class PokemonTeamViewModel(
         _isAddButtonEnable.postValue(false)
         viewModelScope.launch {
             try {
-                val pokeTeam = pokemonTeamRepository.getTeam(teamName)
+                val pokeTeam = pokemonTeamRepository.getTeam(teamId)
                 searchPokemon(pokeTeam)
             } catch (e: Exception) {
                 _error.postValue("Erro Desconhecido !")
@@ -55,7 +55,7 @@ class PokemonTeamViewModel(
             _isAddButtonEnable.postValue(false)
             viewModelScope.launch {
                 try {
-                    pokemonTeamRepository.removePokemon(teamName, pokemonId)
+                    pokemonTeamRepository.removePokemon(teamId, pokemonId)
                     _pokemonRemoved.postValue(Unit)
                 } catch (e: Exception) {
                     _error.postValue("Erro Desconhecido !")

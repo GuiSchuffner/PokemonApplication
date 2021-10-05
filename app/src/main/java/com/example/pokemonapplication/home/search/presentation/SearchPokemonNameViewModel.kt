@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class SearchPokemonNameViewModel(
     private val pokemonName: String,
     private val searchIntent: Int,
-    private val teamName: String,
+    private val teamId: String,
     private val searchPokemonNameRepository: SearchPokemonNameRepository
 ) : ViewModel() {
     private val _pokemon = MutableLiveData<Pokemon>()
@@ -41,12 +41,12 @@ class SearchPokemonNameViewModel(
                 } else {
                     searchPokemonNameRepository.addPokemonToTeam(
                         _pokemon.value!!,
-                        teamName
+                        teamId
                     )
                 }
                 _addToFavoritesFinished.postValue(Unit)
             } catch (e: Exception) {
-                Log.e("aaa", e.message!!)
+                Log.e("erro", e.message!!)
             }
             _loading.postValue(false)
         }

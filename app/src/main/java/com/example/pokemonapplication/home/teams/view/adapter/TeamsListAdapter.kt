@@ -3,6 +3,7 @@ package com.example.pokemonapplication.home.teams.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapplication.R
 import com.example.pokemonapplication.home.model.PokemonTeam
@@ -15,7 +16,8 @@ class TeamsListAdapter(
 ) : RecyclerView.Adapter<TeamsListAdapter.TeamViewHolder>() {
 
     interface SelectTeamListener {
-        fun teamSelectListener(teamName: String)
+        fun teamSelectListener(teamId: String)
+        fun removeTeamListener(teamId: String)
     }
 
     override fun getItemCount(): Int {
@@ -38,6 +40,7 @@ class TeamsListAdapter(
         private val teamDescription: MaterialTextView =
             itemView.findViewById(R.id.team_description_textview)
         private val cardView = itemView.findViewById<MaterialCardView>(R.id.team_item_cardView)
+        private val removeIcon = itemView.findViewById<ImageView>(R.id.image_remove_team)
 
         fun bindListItem(team: PokemonTeam, teamListener: SelectTeamListener) {
             teamName.text = team.name
@@ -45,7 +48,10 @@ class TeamsListAdapter(
             cardView.isClickable = true
             cardView.isFocusable = true
             cardView.setOnClickListener {
-                teamListener.teamSelectListener(team.name!!)
+                teamListener.teamSelectListener(team.id!!)
+            }
+            removeIcon.setOnClickListener {
+                teamListener.removeTeamListener(team.id!!)
             }
         }
     }

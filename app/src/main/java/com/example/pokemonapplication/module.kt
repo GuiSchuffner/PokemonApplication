@@ -14,15 +14,17 @@ import com.example.pokemonapplication.home.teams.team.data.NewPokemonTeamReposit
 import com.example.pokemonapplication.home.teams.team.data.PokemonTeamRepository
 import com.example.pokemonapplication.home.teams.team.presentation.NewPokemonTeamViewModel
 import com.example.pokemonapplication.home.teams.team.presentation.PokemonTeamViewModel
+import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+@InternalCoroutinesApi
 val initialModule = module{
     viewModel {
         SearchPokemonViewModel()
     }
-    viewModel { (pokemonName: String, searchIntent: Int, teamName: String) ->
-        SearchPokemonNameViewModel(pokemonName, searchIntent, teamName, get())
+    viewModel { (pokemonId: String, searchIntent: Int, teamName: String) ->
+        SearchPokemonNameViewModel(pokemonId, searchIntent, teamName, get())
     }
     viewModel { (searchIntent: Int, teamId: Int, pokemonType: String) ->
         SearchPokemonTypeViewModel(searchIntent, teamId, pokemonType, get())

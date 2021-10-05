@@ -54,7 +54,7 @@ class SearchPokemonFragment : Fragment() {
                 SearchPokemonFragmentDirections.actionSearchPokemonFragment3ToSearchPokemonNameFragment(
                     binding.searchPokeomonTextfieldEditText.text.toString(),
                     arguments.searchIntent,
-                    arguments.teamName
+                    arguments.teamId
                 )
             findNavController().navigate(direction)
         }

@@ -10,12 +10,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.pokemonapplication.databinding.FragmentPokemonTeamsBinding
 import com.example.pokemonapplication.home.teams.presentation.PokemonTeamsViewModel
 import com.example.pokemonapplication.home.teams.view.adapter.TeamsListAdapter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PokemonTeamsFragment : Fragment(), TeamsListAdapter.SelectTeamListener {
 
     private var _binding: FragmentPokemonTeamsBinding? = null
     private val binding get() = _binding!!
+
+    @ExperimentalCoroutinesApi
+    @InternalCoroutinesApi
     private val pokemonTeamsViewModel: PokemonTeamsViewModel by viewModel()
 
     override fun onCreateView(
@@ -27,6 +32,8 @@ class PokemonTeamsFragment : Fragment(), TeamsListAdapter.SelectTeamListener {
         return binding.root
     }
 
+    @ExperimentalCoroutinesApi
+    @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pokemonTeamsViewModel.teamsList.observe(viewLifecycleOwner) {
@@ -46,9 +53,21 @@ class PokemonTeamsFragment : Fragment(), TeamsListAdapter.SelectTeamListener {
         }
     }
 
-    override fun teamSelectListener(teamName: String) {
+    override fun teamSelectListener(teamId: String) {
         findNavController().navigate(
-            PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToPokemonTeamActivity(teamName)
+            PokemonTeamsFragmentDirections.actionPokemonTeamsFragmentToPokemonTeamActivity(teamId)
         )
     }
+
+    @ExperimentalCoroutinesApi
+    @InternalCoroutinesApi
+    override fun removeTeamListener(teamId: String) {
+        pokemonTeamsViewModel.removeTeam(teamId)
+    }
+
+    /*@InternalCoroutinesApi
+    override fun onResume() {
+        super.onResume()
+        //pokemonTeamsViewModel.getPokemonTeams()
+    }*/
 }

@@ -11,11 +11,11 @@ import kotlinx.coroutines.withContext
 
 class PokemonTeamRepository(private val pokeApi: PokeApi) {
 
-    suspend fun getTeam(teamName: String): List<Int>? {
+    suspend fun getTeam(teamId: String): List<Int>? {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("teams").child(teamName)
+                .child(userId).child("teams").child("pokemonList").child(teamId)
             return databaseReference
                 .get().await().getValue<List<Int>>()
         }
@@ -37,7 +37,7 @@ class PokemonTeamRepository(private val pokeApi: PokeApi) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("teams").child(teamName)
+                .child(userId).child("teams").child("pokemonList").child(teamName)
             val pokemonList = databaseReference
                 .get().await().getValue<List<Int>>()
             if (pokemonList != null) {
