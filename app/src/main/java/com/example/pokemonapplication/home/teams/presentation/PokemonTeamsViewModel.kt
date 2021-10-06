@@ -55,7 +55,7 @@ class PokemonTeamsViewModel(
                 when {
                     it.isSuccess -> {
                         val list = it.getOrNull()
-                        if (list != null) {
+                        if (list != null && list.isNotEmpty()) {
                             _teamsList.postValue(list)
                             _isTeamsListEmpty.postValue(false)
                         } else {
