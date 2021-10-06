@@ -64,10 +64,4 @@ class PokemonTeamsFragment : Fragment(), TeamsListAdapter.SelectTeamListener {
     override fun removeTeamListener(teamId: String) {
         pokemonTeamsViewModel.removeTeam(teamId)
     }
-
-    /*@InternalCoroutinesApi
-    override fun onResume() {
-        super.onResume()
-        //pokemonTeamsViewModel.getPokemonTeams()
-    }*/
 }

@@ -14,17 +14,6 @@ import kotlinx.coroutines.flow.callbackFlow
 
 class PokemonTeamsRepository {
 
-    /*suspend fun getTeam(): List<PokemonTeam>? {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId != null) {
-            val databaseReference = FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("teams").child("teamsList")
-            return databaseReference
-                .get().await().getValue<List<PokemonTeam>>()
-        }
-        return null
-    }*/
-
     @ExperimentalCoroutinesApi
     fun getTeams() = callbackFlow<Result<List<PokemonTeam>?>> {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -48,6 +37,7 @@ class PokemonTeamsRepository {
             }
             val databaseReference = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId).child("teams").child("teamsList")
+            databaseReference.keepSynced(true)
             databaseReference.addValueEventListener(teamsListener)
             awaitClose {
                 databaseReference.removeEventListener(teamsListener)
