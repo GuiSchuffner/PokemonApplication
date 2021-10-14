@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,9 +13,11 @@ import com.example.pokemonapplication.home.search.view.SearchPokemonActivity
 import com.example.pokemonapplication.home.teams.team.presentation.PokemonTeamViewModel
 import com.example.pokemonapplication.home.teams.team.view.adapter.TeamPokemonListAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+@ExperimentalCoroutinesApi
 class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonListener {
 
     private var _binding: FragmentPokemonTeamBinding? = null
@@ -25,6 +26,10 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
     private val pokemonTeamViewModel: PokemonTeamViewModel by viewModel {
         parametersOf(arguments.teamName)
     }
+    private val adapter = TeamPokemonListAdapter(
+        listOf(),
+        this
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,24 +37,15 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPokemonTeamBinding.inflate(layoutInflater)
+        binding.pokemonRecyclerView.adapter = adapter
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.teamNameTextView.text = ""
-        pokemonTeamViewModel.isAddButtonEnable.observe(viewLifecycleOwner) {
-            binding.addPokemonButton.isEnabled = it
-        }
-        pokemonTeamViewModel.loading.observe(viewLifecycleOwner) {
-            binding.loading.isVisible = it
-            binding.addPokemonButton.isEnabled = !it
-        }
         pokemonTeamViewModel.pokemonList.observe(viewLifecycleOwner) {
-            binding.pokemonRecyclerView.adapter = TeamPokemonListAdapter(
-                it,
-                this
-            )
+            adapter.listChange(it)
         }
         binding.addPokemonButton.setOnClickListener {
             pokemonTeamViewModel.onAddPokemonButtonClicked()
@@ -72,17 +68,10 @@ class PokemonTeamFragment : Fragment(), TeamPokemonListAdapter.RemovePokemonList
                     .show()
             }
         }
-        pokemonTeamViewModel.pokemonRemoved.observe(viewLifecycleOwner) {
-            pokemonTeamViewModel.getPokemonTeam()
-        }
+
     }
 
-    override fun onResume() {
-        super.onResume()
-        pokemonTeamViewModel.getPokemonTeam()
-    }
-
-    override fun removePokemonListener(pokemonId: Int) {
-        pokemonTeamViewModel.removePokemon(pokemonId)
+    override fun removePokemonListener(itemKey: String) {
+        pokemonTeamViewModel.removePokemon(itemKey)
     }
 }

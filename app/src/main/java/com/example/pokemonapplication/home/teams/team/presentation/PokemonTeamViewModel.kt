@@ -4,64 +4,57 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokemonapplication.home.model.Pokemon
+import com.example.pokemonapplication.home.model.PokemonListItem
 import com.example.pokemonapplication.home.teams.team.data.PokemonTeamRepository
+import com.example.pokemonapplication.home.teams.team.model.PokemonListAdapterItem
 import com.example.pokemonapplication.home.util.SingleLiveEvent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class PokemonTeamViewModel(
     private val teamId: String,
     private val pokemonTeamRepository: PokemonTeamRepository
 ) : ViewModel() {
 
-    private val _isAddButtonEnable = MutableLiveData<Boolean>()
-    val isAddButtonEnable: LiveData<Boolean> = _isAddButtonEnable
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-    private val _pokemonList = MutableLiveData<List<Pokemon>>()
-    val pokemonList: LiveData<List<Pokemon>> = _pokemonList
+    private val _pokemonList = MutableLiveData<List<PokemonListAdapterItem>>()
+    val pokemonList: LiveData<List<PokemonListAdapterItem>> = _pokemonList
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
     private val _addPokemon = SingleLiveEvent<Unit>()
     val addPokemon: LiveData<Unit> = _addPokemon
-    private val _pokemonRemoved = SingleLiveEvent<Unit>()
-    val pokemonRemoved: LiveData<Unit> = _pokemonRemoved
 
     private var pokemonListSize: Int = 0
 
 
     init {
-        getPokemonTeam()
+        listenToPokemonList()
     }
 
-    fun getPokemonTeam() {
-        _loading.postValue(true)
-        _isAddButtonEnable.postValue(false)
+    @ExperimentalCoroutinesApi
+    fun listenToPokemonList() {
         viewModelScope.launch {
-            try {
-                val pokeTeam = pokemonTeamRepository.getTeam(teamId)
-                searchPokemon(pokeTeam)
-            } catch (e: Exception) {
-                _error.postValue("Erro Desconhecido !")
+            pokemonTeamRepository.listenPokemonTeam(teamId).collect {
+                when {
+                    it.isSuccess -> {
+                        val list = it.getOrNull()
+                        searchPokemonTeam(list!!)
+                    }
+                    it.isFailure -> {
+                        _error.postValue("Erro Desconhecido !")
+                    }
+                }
             }
-            _isAddButtonEnable.postValue(true)
-            _loading.postValue(false)
         }
     }
 
-    fun removePokemon(pokemonId: Int) {
-        if (!loading.value!!) {
-            _loading.postValue(true)
-            _isAddButtonEnable.postValue(false)
-            viewModelScope.launch {
-                try {
-                    pokemonTeamRepository.removePokemon(teamId, pokemonId)
-                    _pokemonRemoved.postValue(Unit)
-                } catch (e: Exception) {
-                    _error.postValue("Erro Desconhecido !")
-                }
-                _loading.postValue(false)
-                _isAddButtonEnable.postValue(true)
+    fun removePokemon(itemKey: String) {
+        viewModelScope.launch {
+            try {
+                pokemonTeamRepository.removePokemon(teamId, itemKey)
+            } catch (e: Exception) {
+                _error.postValue("Erro Desconhecido !")
             }
         }
     }
@@ -74,11 +67,15 @@ class PokemonTeamViewModel(
         }
     }
 
-    private suspend fun searchPokemon(pokemonTeam: List<Int>?) {
-        val newPokemonList = mutableListOf<Pokemon>()
+    private suspend fun searchPokemonTeam(pokemonTeam: List<PokemonListItem>?) {
+        val newPokemonList = mutableListOf<PokemonListAdapterItem>()
         pokemonListSize = if (pokemonTeam != null) {
-            for (pokemonId in pokemonTeam) {
-                newPokemonList.add(pokemonTeamRepository.searchPokemon(pokemonId))
+            for (pokemonItem in pokemonTeam) {
+                val pokemonListAdapterItem = PokemonListAdapterItem(
+                    pokemonTeamRepository.searchPokemon(pokemonItem.pokemonId!!),
+                    pokemonItem
+                )
+                newPokemonList.add(pokemonListAdapterItem)
             }
             newPokemonList.size
         } else {

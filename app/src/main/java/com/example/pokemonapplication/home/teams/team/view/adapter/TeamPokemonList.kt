@@ -8,18 +8,18 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapplication.R
-import com.example.pokemonapplication.home.model.Pokemon
+import com.example.pokemonapplication.home.teams.team.model.PokemonListAdapterItem
 import com.example.pokemonapplication.home.util.PokemonHelper
 import com.google.android.material.textview.MaterialTextView
 import com.squareup.picasso.Picasso
 
 class TeamPokemonListAdapter(
-    private var pokemonList: List<Pokemon>,
+    private var pokemonList: List<PokemonListAdapterItem>,
     private val removePokemonListener: RemovePokemonListener
 ) : RecyclerView.Adapter<TeamPokemonListAdapter.TeamPokemonItemViewHolder>() {
 
     interface RemovePokemonListener {
-        fun removePokemonListener(pokemonId: Int)
+        fun removePokemonListener(itemKey: String)
     }
 
     override fun getItemCount(): Int {
@@ -34,6 +34,11 @@ class TeamPokemonListAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.pokemon_team_pokemon_item, parent, false)
         return TeamPokemonItemViewHolder(view)
+    }
+
+    fun listChange(list: List<PokemonListAdapterItem>) {
+        pokemonList = list
+        notifyDataSetChanged()
     }
 
     class TeamPokemonItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -51,26 +56,29 @@ class TeamPokemonListAdapter(
         private val imageViewRemovePokemon: ImageView =
             itemView.findViewById(R.id.image_remove_pokemon)
 
-        fun bindListItem(pokemon: Pokemon, removePokemonListener: RemovePokemonListener) {
-            pokemonName.text = pokemon.name.replaceFirstChar {
+        fun bindListItem(
+            pokemonItem: PokemonListAdapterItem,
+            removePokemonListener: RemovePokemonListener
+        ) {
+            pokemonName.text = pokemonItem.pokemon.name.replaceFirstChar {
                 it.uppercase()
             }
-            Picasso.get().load(pokemon.sprites.front_default).into(pokemonImage)
+            Picasso.get().load(pokemonItem.pokemon.sprites.front_default).into(pokemonImage)
             PokemonHelper.bindPokemonTypeImageView(
-                pokemon.types[0].type.name, pokemonType1
+                pokemonItem.pokemon.types[0].type.name, pokemonType1
             )
             imageViewRemovePokemon.setOnClickListener {
-                removePokemonListener.removePokemonListener(pokemon.id)
+                removePokemonListener.removePokemonListener(pokemonItem.pokemonListItem.key!!)
             }
             PokemonHelper.bindPokemonTypeColorCardView(
-                pokemon.types[0].type.name,
+                pokemonItem.pokemon.types[0].type.name,
                 pokemonConstraint,
                 itemView
             )
-            if (pokemon.types.size == 2) {
+            if (pokemonItem.pokemon.types.size == 2) {
                 pokemonType2.isVisible = true
                 PokemonHelper.bindPokemonTypeImageView(
-                    pokemon.types[1].type.name, pokemonType2
+                    pokemonItem.pokemon.types[1].type.name, pokemonType2
                 )
             } else {
                 pokemonType2.isVisible = false
